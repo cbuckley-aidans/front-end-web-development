@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML CSS Cheatsheet</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prismjs/1.29.0/prism.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prismjs/1.29.0/themes/prism-okaidia.min.css">
+    <style>
+        pre[class*="language-"] {
+            background: #1a1a1a !important;
+            margin: 0;
+            border-radius: 0.5rem;
+        }
+        .code-container {
+            background: #2a2a2a;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            padding-left: 1rem;
+        }
+        .code-title {
+            color: #fff;
+            padding: 0.5rem 1rem;
+            font-family: monospace;
+            border-bottom: 1px solid #3a3a3a;
+        }
+        .preview-title {
+            color: #888;
+            font-family: monospace;
+            margin-bottom: 0.5rem;
+        }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 5rem;
+        }
+    </style>
+</head>
+<body class="bg-base-200 min-h-screen">
+    <div class="drawer">
+        <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content">
+            <!-- Navbar -->
+            <div class="navbar bg-base-100 shadow-lg sticky top-0 z-50">
+                <div class="flex-none lg:hidden">
+                    <label for="my-drawer" class="btn btn-square btn-ghost">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </label>
+                </div>
+                <div class="flex-1">
+                    <a href="index.html" class="btn btn-ghost normal-case text-xl">Web Development Reference</a>
+                </div>
+                <div class="flex-none hidden lg:block">
+                    <ul class="menu menu-horizontal px-1">
+                        <li><a href="#html">HTML</a></li>
+                        <li><a href="#css">CSS</a></li>
+                        <li><a href="#layout">Layout</a></li>
+                        <li><a href="#forms">Forms</a></li>
+                        <li><a href="#animations">Animations</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="container mx-auto px-4 py-8">
+                <!-- HTML Section -->
+                <section id="html" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6">HTML Basics</h2>
+                    
+                    <!-- Document Structure -->
+                    <div class="card bg-base-100 shadow-xl mb-6">
+                        <div class="card-body">
+                            <h3 class="card-title">Document Structure</h3>
+                            <p class="mb-8">Every HTML page needs a basic structure. The <code>head</code> section contains metadata, while the <code>body</code> contains visible content.</p>
+                            <div class="code-container">
+                                <div class="code-title">Code</div>
+                                <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My Web Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Content goes here --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Headings -->
+                    <div class="card bg-base-100 shadow-xl mb-6">
+                        <div class="card-body">
+                            <h3 class="card-title">Headings</h3>
+                            <p class="mb-8">HTML headings create a clear content hierarchy. Use them in order without skipping levels for proper document structure.</p>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <div class="code-container">
+                                    <div class="code-title">Code</div>
+                                    <pre><code class="language-html">&lt;h1&gt;Main Heading&lt;/h1&gt;
+&lt;h2&gt;Subheading Level 2&lt;/h2&gt;
+&lt;h3&gt;Subheading Level 3&lt;/h3&gt;
+&lt;h4&gt;Subheading Level 4&lt;/h4&gt;
+&lt;h5&gt;Subheading Level 5&lt;/h5&gt;
+&lt;h6&gt;Subheading Level 6&lt;/h6&gt;</code></pre>
+                                </div>
+                                <div>
+                                    <div class="preview-title">Example</div>
+                                    <div class="preview bg-base-300 p-4 rounded-lg">
+                                        <h1 class="text-4xl mb-4">Main Heading</h1>
+                                        <h2 class="text-3xl mb-3">Subheading Level 2</h2>
+                                        <h3 class="text-2xl mb-3">Subheading Level 3</h3>
+                                        <h4 class="text-xl mb-2">Subheading Level 4</h4>
+                                        <h5 class="text-lg mb-2">Subheading Level 5</h5>
+                                        <h6 class="text-base">Subheading Level 6</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paragraphs and Text -->
+                    <div class="card bg-base-100 shadow-xl mb-6">
+                        <div class="card-body">
+                            <h3 class="card-title">Paragraphs and Text Formatting</h3>
+                            <p class="mb-8">Paragraphs are the building blocks of text content. Use semantic tags for emphasis and strong importance.</p>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <div class="code-container">
+                                    <div class="code-title">Code</div>
+                                    <pre><code class="language-html">&lt;p&gt;This is a regular paragraph of text.&lt;/p&gt;
+
+&lt;p&gt;
+    This paragraph has &lt;em&gt;emphasized&lt;/em&gt; and 
+    &lt;strong&gt;important&lt;/strong&gt; text.
+&lt;/p&gt;
+
+&lt;p&gt;
+    Text can be &lt;mark&gt;highlighted&lt;/mark&gt;,
+    &lt;sup&gt;superscript&lt;/sup&gt;, or
+    &lt;sub&gt;subscript&lt;/sub&gt;.
+&lt;/p&gt;</code></pre>
+                                </div>
+                                <div>
+                                    <div class="preview-title">Example</div>
+                                    <div class="preview bg-base-300 p-4 rounded-lg space-y-4">
+                                        <p>This is a regular paragraph of text.</p>
+                                        <p>This paragraph has <em>emphasized</em> and <strong>important</strong> text.</p>
+                                        <p>Text can be <mark>highlighted</mark>, <sup>superscript</sup>, or <sub>subscript</sub>.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Lists -->
+                    <div class="card bg-base-100 shadow-xl mb-6">
+                        <div class="card-body">
+                            <h3 class="card-title">Lists</h3>
+                            <p class="mb-8">HTML provides ordered, unordered, and description lists for organizing content.</p>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <div class="code-container">
+                                    <div class="code-title">Code</div>
+                                    <pre><code class="language-html">&lt;!-- Unordered List --&gt;
+&lt;ul&gt;
+    &lt;li&gt;First item&lt;/li&gt;
+    &lt;li&gt;Second item&lt;/li&gt;
+    &lt;li&gt;Third item&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- Ordered List --&gt;
+&lt;ol&gt;
+    &lt;li&gt;First step&lt;/li&gt;
+    &lt;li&gt;Second step&lt;/li&gt;
+    &lt;li&gt;Third step&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!-- Description List --&gt;
+&lt;dl&gt;
+    &lt;dt&gt;HTML&lt;/dt&gt;
+    &lt;dd&gt;HyperText Markup Language&lt;/dd&gt;
+    &lt;dt&gt;CSS&lt;/dt&gt;
+    &lt;dd&gt;Cascading Style Sheets&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+                                </div>
+                                <div>
+                                    <div class="preview-title">Example</div>
+                                    <div class="preview bg-base-300 p-4 rounded-lg space-y-6">
+                                        <ul class="list-disc list-inside">
+                                            <li>First item</li>
+                                            <li>Second item</li>
+                                            <li>Third item</li>
+                                        </ul>
+
+                                        <ol class="list-decimal list-inside">
+                                            <li>First step</li>
+                                            <li>Second step</li>
+                                            <li>Third step</li>
+                                        </ol>
+
+                                        <dl class="space-y-2">
+                                            <dt class="font-bold">HTML</dt>
+                                            <dd class="ml-4">HyperText Markup Language</dd>
+                                            <dt class="font-bold">CSS</dt>
+                                            <dd class="ml-4">Cascading Style Sheets</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tables -->
+                    <div class="card bg-base-100 shadow-xl mb-6">
+                        <div class="card-body">
+                            <h3 class="card-title">Tables</h3>
+                            <p class="mb-8">Tables organize data into rows and columns. Use semantic table elements for better accessibility.</p>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <div class="code-container">
+                                    <div class="code-title">Code</div>
+                                    <pre><code class="language-html">&lt;table&gt;
+    &lt;caption&gt;Monthly Sales&lt;/caption&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th scope="col"&gt;Month&lt;/th&gt;
+            &lt;th scope="col"&gt;Sales&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;January&lt;/td&gt;
+            &lt;td&gt;$10,000&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;February&lt;/td&gt;
+            &lt;td&gt;$12,500&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tfoot&gt;
+        &lt;tr&gt;
+            &lt;th scope="row"&gt;Total&lt;/th&gt;
+            &lt;td&gt;$22,500&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+                                </div>
+                                <div>
+                                    <div class="preview-title">Example</div>
+                                    <div class="preview bg-base-300 p-4 rounded-lg">
+                                        <div class="overflow-x-auto">
+                                            <table class="table table-zebra w-full">
+                                                <caption class="caption-top mb-2">Monthly Sales</caption>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Month</th>
+                                                        <th>Sales</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>January</td>
+                                                        <td>$10,000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>February</td>
+                                                        <td>$12,500</td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Total</th>
+                                                        <td>$22,500</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Links and Images -->
+                    <div class="card bg-base-100 shadow-xl mb-6">
+                        <div class="card-body">
+                            <h3 class="card-title">Links and Images</h3>
+                            <p class="mb-8">Links connect pages together, while images add visual content. Both need proper attributes for accessibility.</p>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <div class="code-container">
+                                    <div class="code-title">Code</div>
+                                    <pre><code class="language-html">&lt;!-- Links --&gt;
+&lt;a href="https://example.com"&gt;
+    External Link
+&lt;/a&gt;
+
+&lt;a href="/about" title="About Us"&gt;
+    Internal Link
+&lt;/a&gt;
+
+&lt;!-- Images --&gt;
+&lt;img 
+    src="cat.jpg" 
+    alt="A sleeping cat"
+    width="150"
+    height="100"
+    loading="lazy"
+&gt;
+
+</code></pre>
+                                </div>
+                                <div>
+                                    <div class="preview-title">Example</div>
+                                    <div class="preview bg-base-300 p-4 rounded-lg space-y-4">
+                                        <div class="space-x-4">
+                                            <a href="#" class="link link-primary">External Link</a>
+                                            <a href="#" class="link link-secondary">Internal Link</a>
+                                        </div>
+                                        
+                                        <img 
+                                            src="images/cat.webp"
+                                            alt="Placeholder image"
+                                            class="rounded shadow-lg"
+                                            width="450"
+                                            height="300"
+                                        >
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CSS Section -->
+                <section id="css" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6">CSS Basics</h2>
+
+                    <!-- CSS Classes and Selectors -->
+                    <div class="card bg-base-100 shadow-xl mb-6">
+                        <div class="card-body">
+                            <h3 class="card-title">Classes and Selectors</h3>
+                            <p class="mb-8">CSS selectors target elements for styling. Classes allow reusable styles across multiple elements.</p>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <div class="code-container">
+                                    <div class="code-title">Code</div>
+                                    <pre><code class="language-css">/* This would apply to ALL paragraph tags. */
+p {
+    line-height: 1.6;
+}
+
+/* This would ONLY apply to tags that have the class "highlight". */
+.highlight {
+    background-color: yellow;
+    padding: 0.5em;
+}
+
+/* ID Selector - IDs are unique and only used for ONE thing on the page. */
+#main-header {
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+/* ALL paragraph tags that belong to the card class only. */
+.card p {
+    margin-bottom: 1em;
+}
+
+/* ALL tags of a certain kind that are hovered over with the mouse. */
+a:hover {
+    color: #ff0000;
+}
+
+.button:focus {
+    outline: 2px solid blue;
+}</code></pre>
+                                </div>
+                                <div>
+                                    <div class="preview-title">Example</div>
+                                    <div class="preview bg-base-300 p-4 rounded-lg space-y-4">
+                                        <p class="leading-relaxed">Regular paragraph with line height.</p>
+                                        
+                                        <p class="bg-yellow-300 text-black p-2 rounded">
+                                            Highlighted text with class
+                                        </p>
+                                        
+                                        <h1 id="main-header" class="text-2xl mb-4">
+                                            Main Header
+                                        </h1>
+                                        
+                                        <div class="card bg-base-100 p-4">
+                                            <p class="mb-4">Card paragraph with margin</p>
+                                        </div>
+                                        
+                                        <button class="btn btn-primary hover:bg-red-500 focus:outline focus:outline-blue-500">
+                                            Hover and Focus Demo
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Box Model -->
+                    <div class="card bg-base-100 shadow-xl mb-6">
+                        <div class="card-body">
+                            <h3 class="card-title">Box Model</h3>
+                            <p class="mb-8">The CSS box model defines how elements take up space with content, padding, border, and margin.</p>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <div class="code-container">
+                                    <div class="code-title">Code</div>
+                                    <pre><code class="language-css">.box {
+    /* Content dimensions */
+    width: 200px;
+    height: 100px;
+
+    /* Inner spacing */
+    padding: 20px;
+    
+    /* Border */
+    border: 2px solid #666;
+    border-radius: 8px;
+    
+    /* Outer spacing */
+    margin: 20px;
+}
+
+.box-sizing {
+    box-sizing: border-box;
+}</code></pre>
+                                </div>
+                                <div>
+                                    <div class="preview-title">Example</div>
+                                    <div class="preview bg-base-300 p-4 rounded-lg space-y-4">
+                                        <div class="w-48 h-24 p-4 border-2 border-accent m-4 rounded bg-base-100">
+                                            Content Box
+                                        </div>
+                                        <div class="w-48 h-24 p-4 border-2 border-primary m-4 rounded bg-base-100 box-border">
+                                            Border Box
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layout Section -->
+                    <section id="layout" class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6">Layout</h2>
+
+                        <!-- Flexbox -->
+                        <div class="card bg-base-100 shadow-xl mb-6">
+                            <div class="card-body">
+                                <h3 class="card-title">Flexbox Layout</h3>
+                                <p class="mb-8">Flexbox creates flexible, responsive layouts with dynamic sizing and alignment.</p>
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                    <div class="code-container">
+                                        <div class="code-title">Code</div>
+                                        <pre><code class="language-css">.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.flex-grow {
+    flex-grow: 1;
+}
+
+.flex-shrink {
+    flex-shrink: 1;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}</code></pre>
+                                    </div>
+                                    <div>
+                                        <div class="preview-title">Example</div>
+                                        <div class="preview bg-base-300 p-4 rounded-lg space-y-4">
+                                            <div class="flex justify-between items-center gap-4">
+                                                <div class="p-4 bg-primary text-primary-content rounded">1</div>
+                                                <div class="p-4 bg-primary text-primary-content rounded flex-grow">2</div>
+                                                <div class="p-4 bg-primary text-primary-content rounded">3</div>
+                                            </div>
+                                            
+                                            <div class="flex flex-wrap gap-2">
+                                                <div class="p-4 bg-secondary text-secondary-content rounded">A</div>
+                                                <div class="p-4 bg-secondary text-secondary-content rounded">B</div>
+                                                <div class="p-4 bg-secondary text-secondary-content rounded">C</div>
+                                                <div class="p-4 bg-secondary text-secondary-content rounded">D</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Grid Layout -->
+                        <div class="card bg-base-100 shadow-xl mb-6">
+                            <div class="card-body">
+                                <h3 class="card-title">Grid Layout</h3>
+                                <p class="mb-8">CSS Grid creates two-dimensional layouts with rows and columns.</p>
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                    <div class="code-container">
+                                        <div class="code-title">Code</div>
+                                        <pre><code class="language-css">.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 1rem;
+}
+
+.span-2-cols {
+    grid-column: span 2;
+}
+
+.span-2-rows {
+    grid-row: span 2;
+}
+
+.grid-area {
+    grid-area: header;
+}</code></pre>
+                                    </div>
+                                    <div>
+                                        <div class="preview-title">Example</div>
+                                        <div class="preview bg-base-300 p-4 rounded-lg">
+                                            <div class="grid grid-cols-3 gap-4">
+                                                <div class="col-span-3 p-4 bg-primary text-primary-content rounded">Header</div>
+                                                <div class="col-span-2 p-4 bg-secondary text-secondary-content rounded">Main Content</div>
+                                                <div class="row-span-2 p-4 bg-accent text-accent-content rounded">Sidebar</div>
+                                                <div class="col-span-2 p-4 bg-neutral text-neutral-content rounded">Footer</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Forms Section -->
+                        <section id="forms" class="mb-12">
+                            <h2 class="text-3xl font-bold mb-6">Forms and Input</h2>
+                            
+                            <div class="card bg-base-100 shadow-xl mb-6">
+                                <div class="card-body">
+                                    <h3 class="card-title">Form Controls</h3>
+                                    <p class="mb-8">Create accessible forms with proper labels and input types.</p>
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                        <div class="code-container">
+                                            <div class="code-title">Code</div>
+                                            <pre><code class="language-html">&lt;form&gt;
+    &lt;div class="form-control"&gt;
+        &lt;label for="name"&gt;
+            Name: &lt;span aria-hidden="true"&gt;*&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;input 
+            type="text" 
+            id="name"
+            required
+            placeholder="Enter your name"
+        &gt;
+    &lt;/div&gt;
+
+    &lt;div class="form-control"&gt;
+        &lt;label for="email"&gt;Email:&lt;/label&gt;
+        &lt;input 
+            type="email" 
+            id="email"
+            placeholder="you@example.com"
+        &gt;
+    &lt;/div&gt;
+
+    &lt;fieldset&gt;
+        &lt;legend&gt;Preferences:&lt;/legend&gt;
+        &lt;div class="checkbox"&gt;
+            &lt;input 
+                type="checkbox" 
+                id="newsletter"
+            &gt;
+            &lt;label for="newsletter"&gt;
+                Subscribe to newsletter
+            &lt;/label&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                                        </div>
+                                        <div>
+                                            <div class="preview-title">Example</div>
+                                            <div class="preview bg-base-300 p-4 rounded-lg">
+                                                <form class="space-y-4">
+                                                    <div class="form-control">
+                                                        <label class="label">
+                                                            <span class="label-text">Name:</span>
+                                                            <span class="text-error" aria-hidden="true">*</span>
+                                                        </label>
+                                                        <input type="text" placeholder="Enter your name" class="input input-bordered w-full" required>
+                                                    </div>
+                                                    
+                                                    <div class="form-control">
+                                                        <label class="label">
+                                                            <span class="label-text">Email:</span>
+                                                        </label>
+                                                        <input type="email" placeholder="you@example.com" class="input input-bordered w-full">
+                                                    </div>
+                                                    
+                                                    <fieldset class="border border-base-content/20 rounded-lg p-4">
+                                                        <legend class="px-2">Preferences:</legend>
+                                                        <div class="form-control">
+                                                            <label class="label cursor-pointer">
+                                                                <span class="label-text">Subscribe to newsletter</span>
+                                                                <input type="checkbox" class="checkbox">
+                                                            </label>
+                                                        </div>
+                                                    </fieldset>
+                                                    
+                                                    <button type="submit" class="btn btn-primary w-full">Submit</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Animations Section -->
+                    <section id="animations" class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6">Animations and Transitions</h2>
+                        
+                        <!-- CSS Transitions -->
+                        <div class="card bg-base-100 shadow-xl mb-6">
+                            <div class="card-body">
+                                <h3 class="card-title">CSS Transitions</h3>
+                                <p class="mb-8">Smooth transitions between element states enhance user experience.</p>
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                    <div class="code-container">
+                                        <div class="code-title">Code</div>
+                                        <pre><code class="language-css">.transition-all {
+    transition: all 0.3s ease;
+}
+
+.hover-transform:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.hover-colors:hover {
+    background-color: #4f46e5;
+    color: white;
+}
+
+.hover-shadow:hover {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}</code></pre>
+                                    </div>
+                                    <div>
+                                        <div class="preview-title">Example</div>
+                                        <div class="preview bg-base-300 p-4 rounded-lg space-y-4">
+                                            <button class="btn w-full transition-all hover:scale-110 hover:rotate-3">
+                                                Transform
+                                            </button>
+                                            
+                                            <button class="btn w-full transition-all hover:bg-indigo-600 hover:text-white">
+                                                Colors
+                                            </button>
+                                            
+                                            <button class="btn w-full transition-all hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                                                Shadow
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Keyframe Animations -->
+                        <div class="card bg-base-100 shadow-xl mb-6">
+                            <div class="card-body">
+                                <h3 class="card-title">Keyframe Animations</h3>
+                                <p class="mb-8">Create complex animations using @keyframes rules.</p>
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                    <div class="code-container">
+                                        <div class="code-title">Code</div>
+                                        <pre><code class="language-css">@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.bounce {
+    animation: bounce 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}</code></pre>
+                                    </div>
+                                    <div>
+                                        <div class="preview-title">Example</div>
+                                        <div class="preview bg-base-300 p-4 rounded-lg space-y-4">
+                                            <button class="btn btn-primary w-full animate-bounce">
+                                                Bounce
+                                            </button>
+                                            
+                                            <button class="btn btn-secondary w-full animate-pulse">
+                                                Pulse
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    
+
+            <!-- Drawer Side -->
+            <div class="drawer-side">
+                <label for="my-drawer" class="drawer-overlay"></label>
+                <ul class="menu p-4 w-80 h-full bg-base-100 text-base-content">
+                    <li><a href="#html">HTML Basics</a></li>
+                    <li><a href="#css">CSS Basics</a></li>
+                    <li><a href="#layout">Layout</a></li>
+                    <li><a href="#forms">Forms</a></li>
+                    <li><a href="#animations">Animations</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Prism.js for syntax highlighting
+        Prism.highlightAll();
+
+        // Close drawer when clicking menu items on mobile
+        document.querySelectorAll('.drawer-side a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('my-drawer').checked = false;
+            });
+        });
+    </script>
+</body>
+</html>
+
