@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Stories</title>
+    <title>User Stories and Design Criteria</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
@@ -18,13 +18,15 @@
     <!-- Navbar -->
     <div class="navbar bg-base-100 shadow-lg sticky top-0 z-50">
         <div class="flex-1">
-            <a href="index.html" class="btn btn-ghost normal-case text-xl">User Stories</a>
+            <a href="index.html" class="btn btn-ghost normal-case text-xl">User Stories and Design Criteria</a>
         </div>
         <div class="flex-none">
             <ul class="menu menu-horizontal px-1">
                 <li><a href="#intro">Introduction</a></li>
                 <li><a href="#steps">Steps</a></li>
                 <li><a href="#examples">Examples</a></li>
+                <li><a href="#criteria">Design Criteria</a></li>
+                <li><a href="#resources">Additional Resources</a></li>
             </ul>
         </div>
     </div>
@@ -262,6 +264,113 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- Design Criteria Section -->
+<section id="criteria" class="card bg-base-100 shadow-xl mb-8">
+    <div class="card-body">
+        <h2 class="card-title text-2xl mb-4">Creating Design Criteria</h2>
+        <p class="mb-4">Once you've gathered your user stories, you can transform them into clear design criteria that will guide your website development and evaluation.</p>
+
+        <div class="alert alert-info mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <div>
+                <h3 class="font-bold">Remember:</h3>
+                <p>Design criteria should focus on WHAT the website must do, not HOW it will do it.</p>
+            </div>
+        </div>
+
+        <!-- Example Transformation -->
+        <div class="bg-base-200 p-6 rounded-lg mb-6">
+            <h3 class="text-xl font-bold mb-4">Example: From User Story to Design Criteria</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card bg-base-300">
+                    <div class="card-body">
+                        <h4 class="card-title text-lg">📝 User Stories</h4>
+                        <ul class="space-y-4">
+                            <li class="font-mono text-sm">"As a student, I want to search for assignments by subject and due date so that I can prioritize my homework."</li>
+                            <li class="font-mono text-sm">"As a student, I want to see my assignment grades immediately after they're entered so I can track my progress."</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card bg-base-300">
+                    <div class="card-body">
+                        <h4 class="card-title text-lg">✅ Design Criteria</h4>
+                        <ul class="space-y-4">
+                            <li>The website must allow users to filter assignments by both subject and due date</li>
+                            <li>The website must display assignment grades to students as soon as they are entered into the system</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Good vs Bad Criteria -->
+        <div class="card bg-base-200">
+            <div class="card-body">
+                <h3 class="card-title text-xl mb-4">Good vs Poor Design Criteria</h3>
+                <div class="overflow-x-auto">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-error">❌ Poor Criteria</th>
+                                <th class="text-success">✅ Good Criteria</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-error">"Use MongoDB to store user data"</td>
+                                <td class="text-success">"The system must securely store user profile information"</td>
+                            </tr>
+                            <tr>
+                                <td class="text-error">"Make the website look nice"</td>
+                                <td class="text-success">"The website must use CARP and the usability principles"</td>
+                            </tr>
+                            <tr>
+                                <td class="text-error">"Add a React search component"</td>
+                                <td class="text-success">"Users must be able to search content within 2 seconds"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evaluation Reminder -->
+        <div class="alert alert-warning mt-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <div>
+                <h3 class="font-bold">Important!</h3>
+                <p>Your design criteria will be used by both you and your peers to evaluate your final website. Make sure each criterion is:</p>
+                <ul class="mt-2">
+                    <li>• Measurable and testable</li>
+                    <li>• Clear and unambiguous</li>
+                    <li>• Focused on requirements, not solutions</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Additional Resources Section -->
+<section id="resources" class="card bg-base-100 shadow-xl mb-8">
+    <div class="card-body">
+        <h2 class="card-title text-2xl mb-4">Additional Resources</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <a href="https://www.atlassian.com/agile/project-management/user-stories" target="_blank" 
+               class="card bg-base-200 hover:bg-base-300 transition-all duration-300">
+                <div class="card-body flex flex-row items-center gap-4">
+                    <div class="text-2xl">📝</div>
+                    <div>
+                        <h3 class="font-bold">More User Story Examples</h3>
+                        <p class="text-sm opacity-70">Examples of more user stories and templates you can use</p>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 </section>
