@@ -10,7 +10,7 @@
             background: #222;
         }
         ::-webkit-scrollbar-thumb {
-            background: #ff0057;
+            background: #002654;
         }
         body {
             margin: 0;
@@ -40,6 +40,8 @@
         .card {
             position: relative;
             cursor: pointer;
+            text-decoration: none;
+            color: inherit;
         }
         .face {
             width: 300px;
@@ -56,7 +58,7 @@
             transform: translateY(100px);
         }
         .card:hover .face.face1 {
-            background: #ff0057;
+            background: #002654;
             transform: translateY(0);
         }
         .face.face1 .content {
@@ -95,19 +97,7 @@
         .face.face2 .content p {
             margin: 0;
             padding: 0;
-        }
-        .face.face2 .content a {
-            margin: 15px 0 0;
-            display: inline-block;
-            text-decoration: none;
-            font-weight: 900;
             color: #333;
-            padding: 5px;
-            border: 1px solid #333;
-        }
-        .face.face2 .content a:hover {
-            background: #333;
-            color: #fff;
         }
         @media (max-width: 768px) {
             .container {
@@ -127,7 +117,7 @@
     <h1>Front-End Web Development Resources</h1>
     <div class="container">
         <!-- User Stories Card -->
-        <div class="card">
+        <a href="userstories.html" class="card">
             <div class="face face1">
                 <div class="content">
                     <img src="images/user-stories.png" alt="User Stories Icon">
@@ -137,13 +127,12 @@
             <div class="face face2">
                 <div class="content">
                     <p>Learn how to write effective user stories and understand their role in web development.</p>
-                    <a href="userstories.html">Read More</a>
                 </div>
             </div>
-        </div>
+        </a>
 
         <!-- Usability Card -->
-        <div class="card">
+        <a href="usability.html" class="card">
             <div class="face face1">
                 <div class="content">
                     <img src="images/usability.svg" alt="Usability Icon">
@@ -153,13 +142,12 @@
             <div class="face face2">
                 <div class="content">
                     <p>Explore principles of user-centered design and web accessibility standards.</p>
-                    <a href="usability.html">Read More</a>
                 </div>
             </div>
-        </div>
+        </a>
 
         <!-- Wireframing Card -->
-        <div class="card">
+        <a href="wireframing.html" class="card">
             <div class="face face1">
                 <div class="content">
                     <img src="images/wireframing.svg" alt="Wireframing Icon">
@@ -169,13 +157,12 @@
             <div class="face face2">
                 <div class="content">
                     <p>Learn to create effective wireframes and prototype your web designs.</p>
-                    <a href="wireframing.html">Read More</a>
                 </div>
             </div>
-        </div>
+        </a>
 
         <!-- HTML/CSS Card -->
-        <div class="card">
+        <a href="html-css.html" class="card">
             <div class="face face1">
                 <div class="content">
                     <img src="images/html-css.svg" alt="HTML/CSS Icon">
@@ -185,13 +172,12 @@
             <div class="face face2">
                 <div class="content">
                     <p>Review your HTML and CSS basics, including layouts.</p>
-                    <a href="html-css.html">Read More</a>
                 </div>
             </div>
-        </div>
+        </a>
 
         <!-- Tailwind CSS Card -->
-        <div class="card">
+        <a href="tailwind.html" class="card">
             <div class="face face1">
                 <div class="content">
                     <img src="images/tailwind.svg" alt="Tailwind CSS Icon">
@@ -201,13 +187,12 @@
             <div class="face face2">
                 <div class="content">
                     <p>Learn utility-first CSS with the Tailwind framework.</p>
-                    <a href="tailwind.html">Read More</a>
                 </div>
             </div>
-        </div>
+        </a>
 
         <!-- Component Libraries Card -->
-        <div class="card">
+        <a href="libraries.html" class="card">
             <div class="face face1">
                 <div class="content">
                     <img src="images/libraries.svg" alt="Component Libraries Icon">
@@ -217,13 +202,12 @@
             <div class="face face2">
                 <div class="content">
                     <p>Explore component libraries and rapid prototyping tools.</p>
-                    <a href="libraries.html">Read More</a>
                 </div>
             </div>
-        </div>
+        </a>
 
         <!-- Evaluating Designs Card -->
-        <div class="card">
+        <a href="evaluation.html" class="card">
             <div class="face face1">
                 <div class="content">
                     <img src="images/evaluation.svg" alt="Evaluation Icon">
@@ -233,10 +217,9 @@
             <div class="face face2">
                 <div class="content">
                     <p>Learn to evaluate and improve your web designs.</p>
-                    <a href="evaluation.html">Read More</a>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 </body>
 </html>

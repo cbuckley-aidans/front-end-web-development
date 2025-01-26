@@ -1,47 +1,312 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Web Page</title>
+    <title>User Stories</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 5rem;
+        }
+    </style>
 </head>
-<body>
-    <form>
-        <div class="form-control">
-            <label for="name">
-                Name: <span aria-hidden="true">*</span>
-            </label>
-            <input 
-                type="text" 
-                id="name"
-                required
-                placeholder="Enter your name"
-            >
+<body class="bg-base-200 min-h-screen">
+    <!-- Navbar -->
+    <div class="navbar bg-base-100 shadow-lg sticky top-0 z-50">
+        <div class="flex-1">
+            <a href="index.html" class="btn btn-ghost normal-case text-xl">User Stories</a>
         </div>
-    
-        <div class="form-control">
-            <label for="email">Email:</label>
-            <input 
-                type="email" 
-                id="email"
-                placeholder="you@example.com"
-            >
+        <div class="flex-none">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="#intro">Introduction</a></li>
+                <li><a href="#steps">Steps</a></li>
+                <li><a href="#examples">Examples</a></li>
+            </ul>
         </div>
-    
-        <fieldset>
-            <legend>Preferences:</legend>
-            <div class="checkbox">
-                <input 
-                    type="checkbox" 
-                    id="newsletter"
-                >
-                <label for="newsletter">
-                    Subscribe to newsletter
-                </label>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Introduction -->
+
+        <section id="intro" class="card bg-base-100 shadow-xl mb-8">
+            <div class="card-body">
+                <h1 class="card-title text-3xl mb-4">Creating User Stories from Technical Requirements</h1>
+                <p class="text-lg">User stories help translate technical requirements into clear, user-focused descriptions of functionality. They follow the format:</p>
+                <div class="bg-base-200 p-4 rounded-lg my-4">
+                <p>As a <span class="font-bold">[type of user]</span>, I want to <span class="font-bold">[goal]</span>, so that I can <span class="font-bold">[benefit]</span>.</p>
             </div>
-        </fieldset>
-    
-        <button type="submit">Submit</button>
-    </form>
-</body>
-</html>
+                <div class="bg-base-200 p-4 rounded-lg my-4">
+                    <p id="typewriter" class="font-mono h-6"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Steps Section -->
+        <section id="steps" class="card bg-base-100 shadow-xl mb-8">
+            <div class="card-body">
+                <h2 class="card-title text-2xl mb-4">Steps to Creating User Stories</h2>
+                <div class="steps steps-vertical lg:steps-horizontal">
+                    <div class="step step-primary">Identify the User(s)</div>
+                    <div class="step step-primary">Define Goals</div>
+                    <div class="step step-primary">Specify Benefits</div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                    <div class="card bg-base-200">
+                        <div class="card-body">
+                            <h3 class="card-title">1. Identify Users</h3>
+                            <p>Who will use this feature? Be specific about the type of user:</p>
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Registered user</li>
+                                <li>Admin user</li>
+                                <li>Guest visitor</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card bg-base-200">
+                        <div class="card-body">
+                            <h3 class="card-title">2. Define Goals</h3>
+                            <p>What does the user want to accomplish? Make it:</p>
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Clear and specific</li>
+                                <li>Action-oriented</li>
+                                <li>Achievable</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card bg-base-200">
+                        <div class="card-body">
+                            <h3 class="card-title">3. Specify Benefits</h3>
+                            <p>Why does the user want this? Include:</p>
+                            <ul class="list-disc list-inside mt-2">
+                                <li>Clear value</li>
+                                <li>Business benefit</li>
+                                <li>User benefit</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    
+                    <h2 class="card-title text-2xl mt-4">Example</h2>
+
+                </div>
+                <div class="grid grid-cols-1 gap-6 mt-6">
+                    <!-- Simple Idea -->
+                    <div class="card bg-neutral text-neutral-content">
+                        <div class="card-body">
+                            <h3 class="card-title text-xl">📋 Technical Proposal Requirement</h3>
+                            <div class="p-4 bg-base-300 rounded-lg text-base-content mt-1">
+                                <p>"We need a way for our customers to quickly find what they are looking for on the website."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- User Stories -->
+            <div class="card bg-base-200 mt-6">
+                <div class="card-body">
+                    <h3 class="card-title text-xl">📝 Break this down into a user story using our formula</h3>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-base-300 rounded-lg">
+                            <p class="mb-4">As a <span class="font-bold">[type of user]</span>, I want to <span class="font-bold">[goal]</span>, so that I can <span class="font-bold">[benefit]</span>.</p>
+<hr>
+                            <p class="font-mono mt-4">As a <span class="font-bold">user</span>, I want <span class="font-bold">a search bar</span> so that I can <span class="font-bold">find the item I want to buy quickly</span>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        
+
+
+        <!-- Examples Section -->
+<section id="examples" class="card bg-base-100 shadow-xl mb-8">
+    <div class="card-body">
+        <h2 class="card-title text-2xl mb-4">Interactive Examples: Good vs Bad User Stories</h2>
+        <p class="mb-6">Toggle between examples to see what makes a good user story. Each example highlights common mistakes and how to fix them.</p>
+
+        <!-- Example 1: Non-atomic vs Atomic -->
+        <div class="mb-8">
+            <div class="text-center mb-4">
+                <h3 class="text-xl font-bold mb-4">Example 1: Keeping Stories Focused</h3>
+                <div class="flex items-center justify-center gap-4">
+                    <span class="text-sm">Show Bad Example</span>
+                    <input type="checkbox" class="toggle toggle-primary" id="toggle1" />
+                    <span class="text-sm">Show Good Example</span>
+                </div>
+            </div>
+
+            <div class="card bg-base-200">
+                <div class="card-body">
+                    <div id="story1-bad" class="transition-opacity duration-300">
+                        <div class="alert alert-error mb-4">
+                            <span class="font-bold">❌ Bad User Story:</span>
+                        </div>
+                        <p class="font-mono mb-4">As a student, I want to log in to the school website, view my timetable, check my grades, and message my teachers so that I can manage my school work.</p>
+                        <div class="alert alert-warning mt-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                            <div>
+                                <h3 class="font-bold">Why this needs improvement:</h3>
+                                <p>This story tries to do too many things at once. It combines login, timetable, grades, and messaging into one story.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="story1-good" class="hidden transition-opacity duration-300">
+                        <div class="alert alert-success mb-4">
+                            <span class="font-bold">✅ Better User Story:</span>
+                        </div>
+                        <p class="font-mono mb-4">As a student, I want to view my current timetable so that I can see my daily class schedule.</p>
+                        <div class="alert alert-info mt-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <div>
+                                <h3 class="font-bold">Why this is better:</h3>
+                                <p>This story focuses on one specific feature (viewing timetable). Other features like login and messaging would be separate stories.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 2: Technical vs User-Focused -->
+        <div class="mb-8">
+            <div class="text-center mb-4">
+                <h3 class="text-xl font-bold mb-4">Example 2: Writing for Users</h3>
+                <div class="flex items-center justify-center gap-4">
+                    <span class="text-sm">Show Bad Example</span>
+                    <input type="checkbox" class="toggle toggle-primary" id="toggle2" />
+                    <span class="text-sm">Show Good Example</span>
+                </div>
+            </div>
+
+            <div class="card bg-base-200">
+                <div class="card-body">
+                    <div id="story2-bad" class="transition-opacity duration-300">
+                        <div class="alert alert-error mb-4">
+                            <span class="font-bold">❌ Bad User Story:</span>
+                        </div>
+                        <p class="font-mono mb-4">The system needs to implement a MongoDB database to store user profile pictures with image compression.</p>
+                        <div class="alert alert-warning mt-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                            <div>
+                                <h3 class="font-bold">Why this needs improvement:</h3>
+                                <p>This is written as a technical requirement, not a user story. It focuses on the technical implementation (MongoDB, compression) rather than user needs.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="story2-good" class="hidden transition-opacity duration-300">
+                        <div class="alert alert-success mb-4">
+                            <span class="font-bold">✅ Better User Story:</span>
+                        </div>
+                        <p class="font-mono mb-4">As a student, I want to upload a profile picture to my account so that my classmates can easily recognize me.</p>
+                        <div class="alert alert-info mt-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <div>
+                                <h3 class="font-bold">Why this is better:</h3>
+                                <p>This story focuses on what the user wants to do (upload a picture) and why they want to do it (recognition by classmates).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 3: Vague vs Specific -->
+        <div class="mb-8">
+            <div class="text-center mb-4">
+                <h3 class="text-xl font-bold mb-4">Example 3: Being Specific</h3>
+                <div class="flex items-center justify-center gap-4">
+                    <span class="text-sm">Show Bad Example</span>
+                    <input type="checkbox" class="toggle toggle-primary" id="toggle3" />
+                    <span class="text-sm">Show Good Example</span>
+                </div>
+            </div>
+
+            <div class="card bg-base-200">
+                <div class="card-body">
+                    <div id="story3-bad" class="transition-opacity duration-300">
+                        <div class="alert alert-error mb-4">
+                            <span class="font-bold">❌ Bad User Story:</span>
+                        </div>
+                        <p class="font-mono mb-4">As a student, I want the website to work better so that I can use it more easily.</p>
+                        <div class="alert alert-warning mt-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                            <div>
+                                <h3 class="font-bold">Why this needs improvement:</h3>
+                                <p>"Work better" and "more easily" are too vague. How would we know when this story is complete?</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="story3-good" class="hidden transition-opacity duration-300">
+                        <div class="alert alert-success mb-4">
+                            <span class="font-bold">✅ Better User Story:</span>
+                        </div>
+                        <p class="font-mono mb-4">As a student, I want to search for assignments by subject and due date so that I can prioritize my homework.</p>
+                        <div class="alert alert-info mt-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <div>
+                                <h3 class="font-bold">Why this is better:</h3>
+                                <p>This story clearly states what the user wants (search by subject/date) and why (prioritize homework). We can test if these specific features work.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Toggle functionality for each example
+    function setupToggle(id, badId, goodId) {
+        const toggle = document.getElementById(id);
+        const badExample = document.getElementById(badId);
+        const goodExample = document.getElementById(goodId);
+
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                badExample.classList.add('hidden');
+                goodExample.classList.remove('hidden');
+            } else {
+                badExample.classList.remove('hidden');
+                goodExample.classList.add('hidden');
+            }
+        });
+    }
+
+    // Set up toggles for all examples
+    setupToggle('toggle1', 'story1-bad', 'story1-good');
+    setupToggle('toggle2', 'story2-bad', 'story2-good');
+    setupToggle('toggle3', 'story3-bad', 'story3-good');
+
+    // Typewriter animation
+    const typewriter = new Typewriter('#typewriter', {
+            loop: true,
+            delay: 50,
+        });
+
+        typewriter
+    // First string
+    .typeString('As a student, I want to view my grades so that I can track my overall progress.')
+    .pauseFor(3000)
+    .deleteAll()
+    .pauseFor(1000)
+    // Second string
+    .typeString('As a teacher, I want to add assignments so that students can view their grades.')
+    .pauseFor(3000)
+    .deleteAll()
+    .pauseFor(1000)
+    // Loop back to the first
+    .start();
+
+</script>
