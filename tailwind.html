@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind CSS</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prismjs/1.29.0/prism.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prismjs/1.29.0/themes/prism-okaidia.min.css">
+    <style>
+        pre[class*="language-"] {
+            background: #1a1a1a !important;
+            margin: 0;
+            border-radius: 0.5rem;
+        }
+        .code-container {
+            background: #2a2a2a;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .code-title {
+            color: #fff;
+            padding: 0.5rem 1rem;
+            font-family: monospace;
+            border-bottom: 1px solid #3a3a3a;
+        }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 5rem;
+        }
+    </style>
+</head>
+<body class="bg-base-200 min-h-screen">
+    <div class="drawer">
+        <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content">
+            <!-- Navbar -->
+            <div class="navbar bg-base-100 shadow-lg sticky top-0 z-50">
+                <div class="flex-none lg:hidden">
+                    <label for="my-drawer" class="btn btn-square btn-ghost">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </label>
+                </div>
+                <div class="flex-1">
+                    <a href="index.html" class="btn btn-ghost normal-case text-xl">Tailwind CSS</a>
+                </div>
+                <div class="flex-none hidden lg:block">
+                    <ul class="menu menu-horizontal px-1">
+                        <li><a href="#introduction">Introduction</a></li>
+                        <li><a href="#docs">Using the Docs</a></li>
+                        <li><a href="#basics">Tailwind Basics</a></li>
+                        <li><a href="#examples">Examples</a></li>
+                        <li><a href="#resources">Additional Resources</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 py-8">
+                <!-- Introduction -->
+                <section id="introduction" class="card bg-base-100 shadow-xl mb-8">
+                    <div class="card-body">
+                        <h1 class="card-title text-4xl mb-4">Getting Started with Tailwind CSS</h1>
+                        <p class="text-lg mb-4">Tailwind CSS is a utility-first CSS framework that lets you use pre-built utility classes right in your HTML.</p>
+                        <p class="text-lg mb-4">In simple terms: it speeds up our web developing!</p>
+
+                    </div>
+                </section>
+
+                <section id="installation" class="card bg-base-100 shadow-xl mb-8">
+                    <div class="card-body">
+                        <h2 class="card-title text-2xl mb-4">Installing Tailwind CSS</h2>
+                        <p class="mb-1">There are more appropriate ways of installing Tailwind for a real website, but for our purposes, all we need to do is add a single link in our header tag.</p>
+                        <p class="mb-4">Feel free to copy all of this code to use as a starting template for your projects:</p>
+
+                        <div class="code-container">
+                            <div class="code-title">HTML Boilerplate with Tailwind CSS</div>
+                            <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+        &lt;html lang="en"&gt;
+
+        &lt;head&gt;
+            &lt;meta charset="UTF-8"&gt;
+            &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+            &lt;title&gt;My Tailwind Project&lt;/title&gt;
+            &lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;
+        &lt;/head&gt;
+
+        &lt;body&gt;
+            &lt;div class="container mx-auto p-4"&gt;
+                &lt;h1 class="text-3xl font-bold"&gt;
+                    Hello Tailwind!
+                &lt;/h1&gt;
+            &lt;/div&gt;
+        &lt;/body&gt;
+
+&lt;/html&gt;</code></pre>
+                        </div>
+    
+                    </div>
+                </section>
+
+                <!-- Using the Docs -->
+                <section id="docs" class="card bg-base-100 shadow-xl mb-8">
+                    <div class="card-body">
+                        <h2 class="card-title text-2xl mb-4">Using the Tailwind Documentation</h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <!-- Left column: Steps -->
+                            <div class="space-y-6">
+                                <div class="flex items-center gap-4">
+                                    <div class="badge badge-lg badge-primary">1</div>
+                                    <div>
+                                        <h3 class="font-bold mb-1">Visit Tailwind Docs</h3>
+                                        <p class="text-sm opacity-70 ">Go to <a href="https://tailwindcss.com" target="_blank" class="underline text-blue-500">tailwindcss.com</a></p>
+                                    </div>
+                                </div>
+        
+                                <div class="flex items-center gap-4">
+                                    <div class="badge badge-lg badge-primary">2</div>
+                                    <div>
+                                        <h3 class="font-bold mb-1">Use Quick Search</h3>
+                                        <p class="text-sm opacity-70">Press CTRL + K</p>
+                                    </div>
+                                </div>
+        
+                                <div class="flex items-center gap-4">
+                                    <div class="badge badge-lg badge-primary">3</div>
+                                    <div>
+                                        <h3 class="font-bold mb-1">Browse Categories</h3>
+                                        <p class="text-sm opacity-70">Or use the sidebar navigation</p>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <!-- Right column: GIF -->
+                            <div class="flex justify-center items-center">
+                                <div class="w-full h-full">
+                                    <img src="images/tailwind.gif" alt="Using Tailwind Documentation" class="rounded-lg shadow-lg h-full w-full">
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="alert alert-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <div>
+                                <h3 class="font-bold">Pro Tip!</h3>
+                                <p>The documentation includes live examples you can copy and modify.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tailwind Basics Section -->
+                <section id="basics" class="card bg-base-100 shadow-xl mb-8">
+                    <div class="card-body">
+                        <h2 class="card-title text-2xl mb-4">Tailwind vs Traditional CSS</h2>
+                        <p class="mb-1">We still need to understand the basics of traditional CSS in order to get the most out of Tailwind, but it can help speed up our developing a lot.</p>
+
+                        <p class="mb-6">Let's see how Tailwind CSS compares to traditional CSS with some common examples:</p>
+
+                        <!-- Example 1: Headers -->
+                        <div class="mb-12">
+                            <div class="flex justify-center mb-4">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-sm">Traditional</span>
+                                    <input type="checkbox" class="toggle toggle-primary" id="headerToggle" />
+                                    <span class="text-sm">Tailwind</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <div>
+                                    <div id="headerTraditional" class="code-container">
+                                        <div class="code-title">Traditional CSS - Header</div>
+                                        <pre><code class="language-html">&lt;style&gt;
+.big-header {
+    font-size: 2.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+&lt;/style&gt;
+
+&lt;h1 class="big-header"&gt;
+    Hello World
+&lt;/h1&gt;</code></pre>
+                                    </div>
+
+                                    <div id="headerTailwind" class="code-container hidden">
+                                        <div class="code-title">Tailwind CSS - Header</div>
+                                        <pre><code class="language-html">&lt;h1 class="text-4xl font-bold mb-4"&gt;
+    Hello World
+&lt;/h1&gt;</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="flex justify-center items-center">
+                                    <h1 class="text-4xl font-bold">Hello World</h1>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 2: Buttons -->
+                        <div class="mb-12">
+                            <div class="flex justify-center mb-4">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-sm">Traditional</span>
+                                    <input type="checkbox" class="toggle toggle-primary" id="buttonToggle" />
+                                    <span class="text-sm">Tailwind</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <div>
+                                    <div id="buttonTraditional" class="code-container">
+                                        <div class="code-title">Traditional CSS - Button</div>
+                                        <pre><code class="language-html">&lt;style&gt;
+.cool-button {
+    background-color: #3b82f6;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s;
+}
+.cool-button:hover {
+    background-color: #2563eb;
+}
+&lt;/style&gt;
+
+&lt;button class="cool-button"&gt;
+    Click Me
+&lt;/button&gt;</code></pre>
+                                    </div>
+
+                                    <div id="buttonTailwind" class="code-container hidden">
+                                        <div class="code-title">Tailwind CSS - Button</div>
+                                        <pre><code class="language-html">&lt;button class="bg-blue-500 text-white px-4 
+py-2 rounded hover:bg-blue-600 
+transition-colors"&gt;
+    Click Me
+&lt;/button&gt;</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="flex justify-center items-center">
+                                    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
+                                        Click Me
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example 3: Cards -->
+                        <div>
+                            <div class="flex justify-center mb-4">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-sm">Traditional</span>
+                                    <input type="checkbox" class="toggle toggle-primary" id="cardToggle" />
+                                    <span class="text-sm">Tailwind</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <div>
+                                    <div id="cardTraditional" class="code-container">
+                                        <div class="code-title">Traditional CSS - Card</div>
+                                        <pre><code class="language-html">&lt;style&gt;
+.card {
+    background: white;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+&lt;/style&gt;
+
+&lt;div class="card"&gt;
+    &lt;h3 class="card-title"&gt;Card Title&lt;/h3&gt;
+    &lt;p&gt;Card content goes here...&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                                    </div>
+
+                                    <div id="cardTailwind" class="code-container hidden">
+                                        <div class="code-title">Tailwind CSS - Card</div>
+                                        <pre><code class="language-html">&lt;div class="bg-white rounded-lg p-6 
+shadow-lg dark:bg-gray-800"&gt;
+    &lt;h3 class="text-xl font-bold mb-2"&gt;
+        Card Title
+    &lt;/h3&gt;
+    &lt;p&gt;Card content goes here...&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="flex justify-center items-center">
+                                    <div class="bg-white rounded-lg p-6 shadow-lg dark:bg-gray-800 w-full max-w-md">
+                                        <h3 class="text-xl font-bold mb-2">Card Title</h3>
+                                        <p>Card content goes here...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-12 p-6 bg-base-200 rounded-lg">
+                            <h3 class="text-2xl font-bold mb-4">Notice the Difference?</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start gap-2">
+                                    <svg class="w-6 h-6 text-success flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Way less code: No separate CSS files or style tags needed</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <svg class="w-6 h-6 text-success flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Everything in one place: Style directly in your HTML elements</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <svg class="w-6 h-6 text-success flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Responsive design: values like md: and lg: automatically respond to your screen size</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <!-- Basic Examples Section -->
+                <section id="examples" class="card bg-base-100 shadow-xl mb-8">
+                    <div class="card-body">
+                        <h2 class="card-title text-2xl mb-4">Examples</h2>
+                        <p class="mb-6">Let's explore some common Tailwind classes, starting simple and getting more complex:</p>
+
+                        <!-- Typography -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold mb-4">Typography</h3>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <div class="code-container">
+                                    <div class="code-title">Text Styles</div>
+                                    <pre><code class="language-html">&lt;p class="text-sm"&gt;Small text&lt;/p&gt;
+&lt;p class="text-base"&gt;Normal text&lt;/p&gt;
+&lt;p class="text-xl"&gt;Large text&lt;/p&gt;
+&lt;p class="text-2xl"&gt;Even larger&lt;/p&gt;
+&lt;p class="font-bold"&gt;Bold text&lt;/p&gt;
+&lt;p class="italic"&gt;Italic text&lt;/p&gt;
+&lt;p class="text-blue-500"&gt;Colored text&lt;/p&gt;</code></pre>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="text-sm">Small text</p>
+                                    <p class="text-base">Normal text</p>
+                                    <p class="text-xl">Large text</p>
+                                    <p class="text-2xl">Even larger</p>
+                                    <p class="font-bold">Bold text</p>
+                                    <p class="italic">Italic text</p>
+                                    <p class="text-blue-500">Colored text</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Spacing and Layout -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold mb-4">Spacing & Layout</h3>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <div class="code-container">
+                                    <div class="code-title">Margin & Padding</div>
+                                    <pre><code class="language-html">&lt;div class="space-y-4"&gt;
+  &lt;div class="p-4 bg-blue-500"&gt;
+    Padding all around
+  &lt;/div&gt;
+  &lt;div class="px-4 bg-green-500"&gt;
+    Padding left/right
+  &lt;/div&gt;
+  &lt;div class="py-4 bg-red-500"&gt;
+    Padding top/bottom
+  &lt;/div&gt;
+  &lt;div class="mt-8 bg-yellow-500"&gt;
+    Margin top
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="p-4 bg-blue-500 text-white rounded">
+                                        Padding all around
+                                    </div>
+                                    <div class="px-4 bg-green-500 text-white rounded">
+                                        Padding left/right
+                                    </div>
+                                    <div class="py-4 bg-red-500 text-white rounded">
+                                        Padding top/bottom
+                                    </div>
+                                    <div class="mt-8 bg-yellow-500 text-white rounded">
+                                        Margin top
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- UI Basics -->
+<div class="mb-8">
+    <h3 class="text-xl font-bold mb-4">UI Elements</h3>
+
+    <!-- Buttons -->
+    <div class="mb-8">
+        <h4 class="font-bold mb-4">Buttons</h4>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="code-container">
+                <div class="code-title">Button Styles</div>
+                <pre><code class="language-html">&lt;!-- Basic buttons --&gt;
+&lt;button class="bg-blue-500 hover:bg-blue-700 
+text-white font-bold py-2 px-4 rounded"&gt;
+    Basic Button
+&lt;/button&gt;
+
+&lt;!-- Outlined button --&gt;
+&lt;button class="border-2 border-blue-500 
+text-blue-500 hover:bg-blue-500 hover:text-white 
+py-2 px-4 rounded transition-colors"&gt;
+    Outlined
+&lt;/button&gt;
+
+&lt;!-- Disabled button --&gt;
+&lt;button class="bg-gray-400 text-white py-2 
+px-4 rounded cursor-not-allowed"&gt;
+    Disabled
+&lt;/button&gt;
+
+&lt;!-- Icon button --&gt;
+&lt;button class="bg-green-500 text-white p-2 
+rounded-full hover:bg-green-600"&gt;
+    &lt;svg class="w-6 h-6" ...&gt;&lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+            </div>
+            <div class="space-y-4">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Basic Button
+                </button>
+                
+                <button class="border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white py-2 px-4 rounded transition-colors">
+                    Outlined
+                </button>
+                
+                <button class="bg-gray-400 text-white py-2 px-4 rounded cursor-not-allowed">
+                    Disabled
+                </button>
+                
+                <button class="bg-green-500 text-white p-2 rounded-full hover:bg-green-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Labels -->
+    <div class="mb-8">
+        <h4 class="font-bold mb-4">Labels & Badges</h4>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="code-container">
+                <div class="code-title">Label Styles</div>
+                <pre><code class="language-html">&lt;!-- Basic label --&gt;
+&lt;span class="bg-blue-100 text-blue-800 text-sm 
+font-medium px-2.5 py-0.5 rounded"&gt;
+    Default
+&lt;/span&gt;
+
+&lt;!-- Pill label --&gt;
+&lt;span class="bg-green-100 text-green-800 
+text-sm font-medium px-4 py-1 rounded-full"&gt;
+    Success
+&lt;/span&gt;
+
+&lt;!-- Price tag --&gt;
+&lt;span class="inline-block bg-gray-200 
+rounded-full px-3 py-1 text-sm font-semibold"&gt;
+    $29.99
+&lt;/span&gt;</code></pre>
+            </div>
+            <div class="space-y-4">
+                <span class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded">
+                    Default
+                </span>
+                
+                <span class="bg-green-100 text-green-800 text-sm font-medium px-4 py-1 rounded-full">
+                    Success
+                </span>
+                
+                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold">
+                    $29.99
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shadows -->
+    <div class="mb-8">
+        <h4 class="font-bold mb-4">Shadows</h4>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="code-container">
+                <div class="code-title">Shadow Styles</div>
+                <pre><code class="language-html">&lt;div class="shadow-sm"&gt;Small shadow&lt;/div&gt;
+&lt;div class="shadow"&gt;Regular shadow&lt;/div&gt;
+&lt;div class="shadow-md"&gt;Medium shadow&lt;/div&gt;
+&lt;div class="shadow-lg"&gt;Large shadow&lt;/div&gt;
+&lt;div class="shadow-xl"&gt;Extra large&lt;/div&gt;</code></pre>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white dark:bg-gray-700 p-4 rounded shadow-sm">Small shadow</div>
+                <div class="bg-white dark:bg-gray-700 p-4 rounded shadow">Regular shadow</div>
+                <div class="bg-white dark:bg-gray-700 p-4 rounded shadow-md">Medium shadow</div>
+                <div class="bg-white dark:bg-gray-700 p-4 rounded shadow-lg">Large shadow</div>
+                <div class="bg-white dark:bg-gray-700 p-4 rounded shadow-xl col-span-2">Extra large</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Layout -->
+    <div class="mb-8">
+        <h4 class="font-bold mb-4">Layout & Grid</h4>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="code-container">
+                <div class="code-title">Grid Layouts</div>
+                <pre><code class="language-html">&lt;!-- Basic grid --&gt;
+&lt;div class="grid grid-cols-3 gap-4"&gt;
+    &lt;div&gt;1&lt;/div&gt;
+    &lt;div&gt;2&lt;/div&gt;
+    &lt;div&gt;3&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Responsive grid --&gt;
+&lt;div class="grid grid-cols-1 md:grid-cols-2 
+lg:grid-cols-3 gap-4"&gt;
+    &lt;div&gt;Responsive&lt;/div&gt;
+    ...
+&lt;/div&gt;
+
+&lt;!-- With column span --&gt;
+&lt;div class="grid grid-cols-3 gap-4"&gt;
+    &lt;div class="col-span-2"&gt;Wide&lt;/div&gt;
+    &lt;div&gt;Normal&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            <div class="space-y-4">
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="bg-blue-500 text-white p-4 rounded">1</div>
+                    <div class="bg-blue-500 text-white p-4 rounded">2</div>
+                    <div class="bg-blue-500 text-white p-4 rounded">3</div>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="bg-green-500 text-white p-4 rounded col-span-2">Wide</div>
+                    <div class="bg-green-500 text-white p-4 rounded">Normal</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Elements -->
+    <div class="mb-8">
+        <h4 class="font-bold mb-4">Form Elements</h4>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="code-container">
+                <div class="code-title">Form Components</div>
+                <pre><code class="language-html">&lt;!-- Text input --&gt;
+&lt;input type="text" 
+class="border rounded-lg px-4 py-2 w-full
+focus:outline-none focus:ring-2 
+focus:ring-blue-500"&gt;
+
+&lt;!-- Toggle switch --&gt;
+&lt;label class="relative inline-flex items-center 
+cursor-pointer"&gt;
+  &lt;input type="checkbox" class="sr-only peer"&gt;
+  &lt;div class="w-11 h-6 bg-gray-200 
+  peer-focus:outline-none rounded-full peer 
+  peer-checked:after:translate-x-full 
+  peer-checked:bg-blue-600 after:absolute 
+  after:top-[2px] after:left-[2px] 
+  after:bg-white after:rounded-full 
+  after:h-5 after:w-5 after:transition-all"&gt;
+  &lt;/div&gt;
+&lt;/label&gt;</code></pre>
+            </div>
+            <div class="space-y-8">
+                <input type="text" placeholder="Enter text..." 
+                       class="border rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" class="sr-only peer">
+                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer 
+                              peer-checked:after:translate-x-full peer-checked:bg-blue-600 
+                              after:absolute after:top-[2px] after:left-[2px] after:bg-white 
+                              after:rounded-full after:h-5 after:w-5 after:transition-all">
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+                        <!-- Complex Components -->
+                        <div>
+                            <h4 class="font-bold mb-4">A Complex Card</h4>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <div class="code-container">
+                                    <div class="code-title">Product Card</div>
+                                    <pre><code class="language-html">&lt;div class="max-w-sm rounded overflow-hidden 
+shadow-lg bg-white dark:bg-gray-800"&gt;
+  &lt;img class="w-full h-48 object-cover" 
+    src="product.jpg" alt="Product"&gt;
+  &lt;div class="px-6 py-4"&gt;
+    &lt;div class="font-bold text-xl mb-2"&gt;
+      Product Name
+    &lt;/div&gt;
+    &lt;p class="text-gray-700 dark:text-gray-300 
+    text-base"&gt;
+      Product description here...
+    &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="px-6 pt-4 pb-2"&gt;
+    &lt;span class="inline-block bg-gray-200 
+    dark:bg-gray-700 rounded-full px-3 py-1 
+    text-sm font-semibold mr-2"&gt;
+      $99.99
+    &lt;/span&gt;
+    &lt;button class="bg-blue-500 hover:bg-blue-700 
+    text-white font-bold py-2 px-4 rounded"&gt;
+      Buy Now
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                                </div>
+                                <div class="flex items-center justify-center">
+                                    <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white dark:bg-gray-800">
+                                        <img class="w-full h-48 object-cover" src="images/cat.webp" alt="Product">
+                                        <div class="px-6 py-4">
+                                            <div class="font-bold text-xl mb-2">Product Name</div>
+                                            <p class="text-gray-700 dark:text-gray-300 text-base">
+                                                Product description here...
+                                            </p>
+                                        </div>
+                                        <div class="px-6 pt-4 pb-2">
+                                            <span class="inline-block bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1 text-sm font-semibold mr-2">$99.99</span>
+                                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                                Buy Now
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+<!-- Complete UI Example -->
+<div class="mb-8 mt-12">
+    <h4 class="font-bold mb-4">Putting It All Together</h4>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="code-container">
+            <div class="code-title">Complete UI Example</div>
+            <pre><code class="language-html">&lt;div class="min-h-screen bg-gray-100 
+dark:bg-gray-900"&gt;
+    &lt;!-- Navbar --&gt;
+    &lt;nav class="bg-white dark:bg-gray-800 
+    shadow-lg p-4"&gt;
+        &lt;div class="container mx-auto flex 
+        justify-between items-center"&gt;
+            &lt;span class="text-xl font-bold"&gt;
+                My App
+            &lt;/span&gt;
+            &lt;div class="space-x-4"&gt;
+                &lt;a href="#" class="hover:text-blue-500"&gt;
+                    Home
+                &lt;/a&gt;
+                &lt;a href="#" class="hover:text-blue-500"&gt;
+                    About
+                &lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;!-- Main Content --&gt;
+    &lt;main class="container mx-auto px-4 py-8"&gt;
+        &lt;h1 class="text-3xl font-bold text-center 
+        mb-8"&gt;
+            Welcome to My App
+        &lt;/h1&gt;
+
+        &lt;!-- Cards --&gt;
+        &lt;div class="grid grid-cols-1 md:grid-cols-3 
+        gap-6 mb-8"&gt;
+            &lt;div class="bg-white dark:bg-gray-800 
+            rounded-lg shadow-lg p-6"&gt;
+                &lt;h3 class="font-bold mb-2"&gt;Card 1&lt;/h3&gt;
+                &lt;p&gt;Some content here...&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="bg-white dark:bg-gray-800 
+            rounded-lg shadow-lg p-6"&gt;
+                &lt;h3 class="font-bold mb-2"&gt;Card 2&lt;/h3&gt;
+                &lt;p&gt;More content here...&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="bg-white dark:bg-gray-800 
+            rounded-lg shadow-lg p-6"&gt;
+                &lt;h3 class="font-bold mb-2"&gt;Card 3&lt;/h3&gt;
+                &lt;p&gt;Even more content...&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Centered Image --&gt;
+        &lt;div class="flex justify-center mb-8"&gt;
+            &lt;img src="sample.jpg" 
+            class="rounded-lg shadow-lg w-64 h-64 
+            object-cover"&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Button --&gt;
+        &lt;div class="text-center"&gt;
+            &lt;button class="bg-blue-500 hover:bg-blue-700 
+            text-white font-bold py-2 px-4 rounded-lg 
+            shadow transition-colors"&gt;
+                Get Started
+            &lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/main&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+        <div class="border rounded-lg p-4 bg-gray-100 dark:bg-gray-900">
+            <!-- Live Preview -->
+            <div class="min-h-[600px] bg-gray-100 dark:bg-gray-900">
+                <nav class="bg-white dark:bg-gray-800 shadow-lg p-4">
+                    <div class="container mx-auto flex justify-between items-center">
+                        <span class="text-xl font-bold">My App</span>
+                        <div class="space-x-4">
+                            <a href="#" class="hover:text-blue-500">Home</a>
+                            <a href="#" class="hover:text-blue-500">About</a>
+                        </div>
+                    </div>
+                </nav>
+
+                <main class="container mx-auto px-4 py-8">
+                    <h1 class="text-3xl font-bold text-center mb-8">Welcome to My App</h1>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                            <h3 class="font-bold mb-2">Card 1</h3>
+                            <p>Some content here...</p>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                            <h3 class="font-bold mb-2">Card 2</h3>
+                            <p>More content here...</p>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                            <h3 class="font-bold mb-2">Card 3</h3>
+                            <p>Even more content...</p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center mb-8">
+                        <img src="images/cat.webp" class="rounded-lg shadow-lg w-64 h-64 object-cover">
+                    </div>
+
+                    <div class="text-center">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow transition-colors">
+                            Get Started
+                        </button>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+
+                    
+                </section>
+
+                <!-- Additional Resources Section -->
+<section id="resources" class="card bg-base-100 shadow-xl mb-8">
+    <div class="card-body">
+        <h2 class="card-title text-2xl mb-4">Additional Resources</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <a href="https://www.youtube.com/watch?v=WK6u8YDYqak&list=PL4cUxeGkcC9gpXORlEHjc5bgnIi5HEGhw&index=7" target="_blank" 
+               class="card bg-base-200 hover:bg-base-300 transition-all duration-300">
+                <div class="card-body flex flex-row items-center gap-4">
+                    <div class="text-2xl">🎥</div>
+                    <div>
+                        <h3 class="font-bold">Tailwind Flexboxes</h3>
+                        <p class="text-sm opacity-70">This video very handily shows the creation of a login/signup header using flex boxes</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=vqKie-xmcFs&list=PL4cUxeGkcC9gpXORlEHjc5bgnIi5HEGhw&index=9" target="_blank" 
+               class="card bg-base-200 hover:bg-base-300 transition-all duration-300">
+                <div class="card-body flex flex-row items-center gap-4">
+                    <div class="text-2xl">🎥</div>
+                    <div>
+                        <h3 class="font-bold">Tailwind Cards</h3>
+                        <p class="text-sm opacity-70">This video very handily shows the creation of a recipe card, and a way to round images</p>
+                    </div>
+                </div>
+            </a>
+            
+        </div>
+    </div>
+</section>
+
+            </div>
+        </div>
+
+        <!-- Drawer Side -->
+        <div class="drawer-side">
+            <label for="my-drawer" class="drawer-overlay"></label>
+            <ul class="menu p-4 w-80 h-full bg-base-100 text-base-content">
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#docs">Using the Docs</a></li>
+                <li><a href="#basics">Tailwind Basics</a></li>
+                <li><a href="#examples">Examples</a></li>
+                <li><a href="#resources">Additional Resources</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        function showCategory(categoryId) {
+            // Hide all categories
+            document.querySelectorAll('.category-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show selected category
+            document.getElementById(categoryId).classList.remove('hidden');
+            
+            // Update tab states
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('tab-active');
+            });
+            event.target.classList.add('tab-active');
+        }
+
+        // Close drawer when clicking menu items on mobile
+        document.querySelectorAll('.drawer-side a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('my-drawer').checked = false;
+            });
+        });
+
+        ['header', 'button', 'card'].forEach(type => {
+    const toggle = document.getElementById(`${type}Toggle`);
+    const traditional = document.getElementById(`${type}Traditional`);
+    const tailwind = document.getElementById(`${type}Tailwind`);
+
+    toggle.addEventListener('change', function() {
+        if (this.checked) {
+            traditional.classList.add('hidden');
+            tailwind.classList.remove('hidden');
+        } else {
+            traditional.classList.remove('hidden');
+            tailwind.classList.add('hidden');
+        }
+    });
+});
+    </script>
+</body>
+</html>
