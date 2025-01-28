@@ -262,6 +262,109 @@
     </div>
 </section>
 
+<!-- Typography Section -->
+<section id="typography" class="card bg-base-100 shadow-xl mb-8">
+    <div class="card-body">
+        <h2 class="card-title text-2xl mb-4">Typography & Spacing</h2>
+        <p class="mb-6">Good typography and spacing improves readability and helps users scan content efficiently. Let's explore some key principles:</p>
+
+        <!-- Font Size & Hierarchy -->
+        <div class="bg-base-300 p-6 rounded-lg mb-8">
+            <h3 class="text-xl font-bold mb-4">Font Size Hierarchy</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold">Bad Example</h4>
+                    <div class="bg-base-100 p-4 rounded">
+                        <h1 style="font-size: 18px; margin: 0;">Main Heading</h1>
+                        <h2 style="font-size: 17px; margin: 0;">Subheading</h2>
+                        <p style="font-size: 16px; margin: 0;">This text has little contrast in size, making it hard to establish visual hierarchy and scan the content effectively.</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold">Good Example</h4>
+                    <div class="bg-base-100 p-4 rounded">
+                        <h1 class="text-4xl font-bold mb-2">Main Heading</h1>
+                        <h2 class="text-2xl mb-2">Subheading</h2>
+                        <p class="text-base">This text has clear size differences, making it easy to understand the content structure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Line Height & Width -->
+        <div class="bg-base-300 p-6 rounded-lg mb-8">
+            <h3 class="text-xl font-bold mb-4">Line Height & Width</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Poor Readability</h4>
+                    <div class="bg-base-100 p-4 rounded">
+                        <p style="line-height: 1.2; max-width: 100%;" class="mb-4">
+                            This paragraph has tight line spacing and extends across the full width of its container. When lines of text are too long and too close together, it becomes difficult for readers to track from the end of one line to the beginning of the next. This creates cognitive strain and reduces reading comprehension.
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Good Readability</h4>
+                    <div class="bg-base-100 p-4 rounded">
+                        <p style="line-height: 1.6; max-width: 65ch;" class="mb-4">
+                            This paragraph has comfortable line spacing and a controlled line length. The ideal line length is around 65 characters per line. Combined with proper line height, this makes text easy to read and navigate.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spacing Principles -->
+        <div class="bg-base-300 p-6 rounded-lg">
+            <h3 class="text-xl font-bold mb-4">Spacing: Margin vs Padding</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Margin Example -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Margin (External Spacing)</h4>
+                    <div class="space-y-4">
+                        <div class="bg-primary text-primary-content p-4 rounded relative">
+                            First Element
+                            <div class="absolute inset-x-0 -bottom-4 h-4 bg-error bg-opacity-20"></div>
+                        </div>
+                        <div class="bg-primary text-primary-content p-4 rounded">
+                            Second Element
+                        </div>
+                    </div>
+                    <p class="text-sm mt-4 opacity-70">The red area shows margin - space between elements</p>
+                </div>
+
+                <!-- Padding Example -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Padding (Internal Spacing)</h4>
+                    <div class="bg-primary text-primary-content rounded relative">
+                        <div class="bg-success bg-opacity-20 p-4">
+                            Content with padding
+                        </div>
+                    </div>
+                    <p class="text-sm mt-4 opacity-70">The green area shows padding - space inside an element</p>
+                </div>
+            </div>
+
+            <!-- Spacing Tips -->
+            <div class="alert alert-info mt-6">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div>
+                    <h3 class="font-bold">Spacing Tips</h3>
+                    <ul class="mt-2">
+                        <li>Use margin to separate elements from each other</li>
+                        <li>Use padding to create space between an element's border and its content</li>
+                        <li>Maintain consistent spacing throughout your design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ARIA Labels Section -->
 <section id="aria" class="card bg-base-100 shadow-xl mb-8">
     <div class="card-body">
