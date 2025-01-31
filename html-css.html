@@ -14,18 +14,7 @@
             margin: 0;
             border-radius: 0.5rem;
         }
-        .code-container {
-            background: #2a2a2a;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            padding-left: 1rem;
-        }
-        .code-title {
-            color: #fff;
-            padding: 0.5rem 1rem;
-            font-family: monospace;
-            border-bottom: 1px solid #3a3a3a;
-        }
+        
         .preview-title {
             color: #888;
             font-family: monospace;
@@ -41,6 +30,38 @@
         }
         ::-webkit-scrollbar-thumb {
             background: #002654;
+        }
+        .code-container {
+            position: relative;
+            background: #2a2a2a;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            padding-left: 1rem;
+        }
+        .code-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            font-family: monospace;
+            border-bottom: 1px solid #3a3a3a;
+        }
+        .copy-button {
+            background-color: #444;
+            border: none;
+            border-radius: 0.25rem;
+            color: #fff;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .copy-button:hover {
+            background-color: #555;
+        }
+        .copy-button.copied {
+            background-color: #059669;
         }
     </style>
 </head>
@@ -83,7 +104,9 @@
                             <h3 class="card-title">Document Structure</h3>
                             <p class="mb-8">Every HTML page needs a basic structure. The <code>head</code> section contains metadata, while the <code>body</code> contains visible content.</p>
                             <div class="code-container">
-                                <div class="code-title">Code</div>
+                                <div class="code-title">Code                                 <button class="copy-button" onclick="copyCode(this)">Copy</button>
+</div>
+
                                 <pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -106,7 +129,8 @@
                             <p class="mb-8">HTML headings create a clear hierarchy of importance. Remember that 1 is the largest, and 6 is the smallest.</p>
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                 <div class="code-container">
-                                    <div class="code-title">Code</div>
+                                    <div class="code-title">Code                                 <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                                    </div>
                                     <pre><code class="language-html">&lt;h1&gt;Main Heading&lt;/h1&gt;
 &lt;h2&gt;Subheading Level 2&lt;/h2&gt;
 &lt;h3&gt;Subheading Level 3&lt;/h3&gt;
@@ -136,7 +160,7 @@
                             <p class="mb-8">Paragraphs are the building blocks of text content. Use semantic tags for emphasis and strong importance.</p>
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                 <div class="code-container">
-                                    <div class="code-title">Code</div>
+                                    <div class="code-title">Code <button class="copy-button" onclick="copyCode(this)">Copy</button></div>
                                     <pre><code class="language-html">&lt;p&gt;This is a regular paragraph of text.&lt;/p&gt;
 
 &lt;p&gt;
@@ -168,7 +192,7 @@
                             <p class="mb-8">HTML provides ordered, unordered, and description lists for organizing content.</p>
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                 <div class="code-container">
-                                    <div class="code-title">Code</div>
+                                    <div class="code-title">Code <button class="copy-button" onclick="copyCode(this)">Copy</button></div>
                                     <pre><code class="language-html">&lt;!-- Unordered List --&gt;
 &lt;ul&gt;
     &lt;li&gt;First item&lt;/li&gt;
@@ -225,7 +249,7 @@
                             <p class="mb-8">Tables organize data into rows and columns. Use semantic table elements for better accessibility.</p>
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                 <div class="code-container">
-                                    <div class="code-title">Code</div>
+                                    <div class="code-title">Code <button class="copy-button" onclick="copyCode(this)">Copy</button></div>
                                     <pre><code class="language-html">&lt;table&gt;
     &lt;caption&gt;Monthly Sales&lt;/caption&gt;
     &lt;thead&gt;
@@ -295,7 +319,7 @@
                             <p class="mb-8">Links connect pages together, while images add visual content. Both need proper attributes for accessibility.</p>
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                 <div class="code-container">
-                                    <div class="code-title">Code</div>
+                                    <div class="code-title">Code <button class="copy-button" onclick="copyCode(this)">Copy</button></div>
                                     <pre><code class="language-html">&lt;!-- Links --&gt;
 &lt;a href="https://example.com"&gt;
     External Link
@@ -351,7 +375,7 @@
                             <p class="mb-8">CSS selectors target elements for styling. Classes allow reusable styles across multiple elements.</p>
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                 <div class="code-container">
-                                    <div class="code-title">Code</div>
+                                    <div class="code-title">Code <button class="copy-button" onclick="copyCode(this)">Copy</button></div>
                                     <pre><code class="language-css">/* This would apply to ALL paragraph tags. */
 p {
     line-height: 1.6;
@@ -415,7 +439,7 @@ a:hover {
                             <p class="mb-8">The CSS box model defines how elements take up space with content, padding, border, and margin.</p>
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                 <div class="code-container">
-                                    <div class="code-title">Code</div>
+                                    <div class="code-title">Code <button class="copy-button" onclick="copyCode(this)">Copy</button></div>
                                     <pre><code class="language-css">.box {
     /* Content dimensions */
     width: 200px;
@@ -462,7 +486,7 @@ a:hover {
                                 <p class="mb-8">Flexbox creates flexible, responsive layouts with dynamic sizing and alignment.</p>
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                     <div class="code-container">
-                                        <div class="code-title">Code</div>
+                                        <div class="code-title">Code <button class="copy-button" onclick="copyCode(this)">Copy</button></div>
                                         <pre><code class="language-css">.flex-container {
     display: flex;
     justify-content: space-between;
@@ -510,7 +534,7 @@ a:hover {
                                 <p class="mb-8">CSS Grid creates two-dimensional layouts with rows and columns.</p>
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                     <div class="code-container">
-                                        <div class="code-title">Code</div>
+                                        <div class="code-title">Code <button class="copy-button" onclick="copyCode(this)">Copy</button></div>
                                         <pre><code class="language-css">.grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -555,7 +579,7 @@ a:hover {
                                     <p class="mb-8">Create accessible forms with proper labels and input types.</p>
                                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                         <div class="code-container">
-                                            <div class="code-title">Code</div>
+                                            <div class="code-title">Code <button class="copy-button" onclick="copyCode(this)">Copy</button></div>
                                             <pre><code class="language-html">&lt;form&gt;
     &lt;div class="form-control"&gt;
         &lt;label for="name"&gt;
@@ -641,7 +665,7 @@ a:hover {
                                 <p class="mb-8">Smooth transitions between element states enhance user experience.</p>
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                     <div class="code-container">
-                                        <div class="code-title">Code</div>
+                                        <div class="code-title">Code <button class="copy-button" onclick="copyCode(this)">Copy</button></div>
                                         <pre><code class="language-css">.transition-all {
     transition: all 0.3s ease;
 }
@@ -686,7 +710,7 @@ a:hover {
                                 <p class="mb-8">Create complex animations using @keyframes rules.</p>
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                     <div class="code-container">
-                                        <div class="code-title">Code</div>
+                                        <div class="code-title">Code <button class="copy-button" onclick="copyCode(this)">Copy</button></div>
                                         <pre><code class="language-css">@keyframes bounce {
     0%, 100% {
         transform: translateY(0);
@@ -738,6 +762,8 @@ a:hover {
 
                     
 
+                    
+
             <!-- Drawer Side -->
             <div class="drawer-side">
                 <label for="my-drawer" class="drawer-overlay"></label>
@@ -753,6 +779,31 @@ a:hover {
     </div>
 
     <script>
+         // Add copy functionality
+         async function copyCode(button) {
+            const pre = button.closest('.code-container').querySelector('pre');
+            const code = pre.textContent;
+            
+            try {
+                await navigator.clipboard.writeText(code);
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy text:', err);
+                button.textContent = 'Failed!';
+                
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            }
+        }
+
         // Initialize Prism.js for syntax highlighting
         Prism.highlightAll();
 
