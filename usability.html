@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usability</title>
+    <title>Usability - Glassmorphism Edition</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prismjs/1.29.0/prism.min.js" defer></script>
@@ -12,128 +12,393 @@
     <script src="https://unpkg.com/tippy.js@6"></script>
     <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/themes/light.css" />
     <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: rgba(0, 0, 0, 0.1);
+            --primary-glow: rgba(79, 70, 229, 0.4);
+            --secondary-glow: rgba(139, 92, 246, 0.3);
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 var(--glass-shadow);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-btn {
+            position: relative;
+            transition: all 0.3s;
+            opacity: 0.75;
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            border: 1px solid transparent;
+        }
+        
+        .tab-btn:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tab-btn.active {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+            border-radius: 3px;
+        }
+        
+        .glow {
+            position: relative;
+        }
+        
+        .glow::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            background: radial-gradient(circle at 50% 50%, var(--primary-glow), transparent 70%);
+            z-index: -1;
+            opacity: 0.5;
+            filter: blur(20px);
+            border-radius: 20px;
+        }
+
         pre[class*="language-"] {
-            background: #1a1a1a !important;
+            background: rgba(0, 0, 0, 0.3) !important;
             margin: 0;
-            border-radius: 0.5rem;
+            border-radius: 8px;
         }
+        
         .code-container {
-            background: #2a2a2a;
-            border-radius: 0.5rem;
+            background: rgba(40, 40, 40, 0.3);
+            border-radius: 8px;
             overflow: hidden;
-            padding-left: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        
         .code-title {
             color: #fff;
             padding: 0.5rem 1rem;
             font-family: monospace;
-            border-bottom: 1px solid #3a3a3a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
+        
         .preview-title {
-            color: #888;
+            color: rgba(255, 255, 255, 0.7);
             font-family: monospace;
             margin-bottom: 0.5rem;
         }
+        
         .carp-highlight {
             cursor: pointer;
             transition: all 0.3s ease;
-        }
-        .carp-highlight:hover {
-            outline: 2px solid currentColor;
-            outline-offset: 2px;
-        }
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 5rem;
-        }
-        ::-webkit-scrollbar {
-            width: 10px;
-            background: #222;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #002654;
+            border: 1px solid transparent;
         }
         
+        .carp-highlight:hover {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(79, 70, 229, 0.6);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(79, 70, 229, 0.8);
+        }
+
+        /* Input styling */
+        input[type="color"] {
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .mobile-tabs {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            backdrop-filter: blur(12px);
+            background: rgba(10, 10, 30, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (min-width: 768px) {
+            .mobile-tabs {
+                display: none;
+            }
+        }
     </style>
 </head>
-<body class="bg-base-200 min-h-screen">
-    <div class="drawer">
-        <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content">
-            <!-- Navbar -->
-            <div class="navbar bg-base-100 shadow-lg sticky top-0 z-50">
-                <div class="flex-none lg:hidden">
-                    <label for="my-drawer" class="btn btn-square btn-ghost">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </label>
+<body class="p-4">
+    <div class="container mx-auto max-w-6xl px-4 py-8">
+        <!-- Header -->
+        <header class="glass mb-8 p-6 md:p-8 glow">
+            <div class="mb-6">
+                <div class="mb-4">
+                    <h1 class="text-3xl md:text-4xl font-bold text-white">Making Websites Work for Everyone</h1>
+                    <p class="mt-2 text-lg text-white opacity-80">Learn about accessibility, design principles, and usability</p>
                 </div>
-                <div class="flex-1">
-                    <a href="index.html" class="btn btn-ghost normal-case text-xl">Usability</a>
-                </div>
-                <div class="flex-none hidden lg:block">
-                    <ul class="menu menu-horizontal px-1">
-                        <li><a href="#introduction">Introduction</a></li>
-                        <li><a href="#color-contrast">Colour & Contrast</a></li>
-                        <li><a href="#screen-readers-aria">Screen Readers & ARIA</a></li>
-                        <li><a href="#carp">CARP</a></li>
-                        <li><a href="#usability">Usability Principles</a></li>
-                        <li><a href="#resources">Additional Resources</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="container mx-auto px-4 py-8">
-                <!-- Introduction Section -->
-                <section id="introduction" class="card bg-base-100 shadow-xl mb-8">
-                    <div class="card-body">
-                        <h1 class="card-title text-4xl mb-4">Making Websites Work for Everyone</h1>
-                        <p class="text-lg">Imagine trying to read a website where the text is so faint you can barely see it, or trying to use a button that's impossible to click.</p>
-                        <p class="text-lg">For many people, these aren't just annoying problems - they're barriers that can make websites completely unusable.</p>
-                        <p class="text-lg">This page has some examples of best practices to use when designing your own website, as well as ways to check if your website is accessible to diverse users.</p>
-
+                
+                <!-- Desktop Tab Navigation -->
+                <nav class="flex justify-center mt-8">
+                    <div class="glass-card p-2 rounded-xl flex flex-wrap justify-center gap-2">
+                        <button class="tab-btn active flex items-center px-4 py-3" data-tab="introduction">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Introduction
+                        </button>
+                        <button class="tab-btn flex items-center px-4 py-3" data-tab="color-contrast">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                            </svg>
+                            Colour & Contrast
+                        </button>
+                        <button class="tab-btn flex items-center px-4 py-3" data-tab="screen-readers">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                            Accessibility
+                        </button>
+                        <button class="tab-btn flex items-center px-4 py-3" data-tab="carp">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                            </svg>
+                            CARP Design
+                        </button>
+                        <button class="tab-btn flex items-center px-4 py-3" data-tab="usability">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path>
+                            </svg>
+                            Usability
+                        </button>
+                        <button class="tab-btn flex items-center px-4 py-3" data-tab="resources">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Resources
+                        </button>
                     </div>
-                </section>
+                </nav>
+            </div>
+        </header>
 
-                <!-- Colour Contrast Section -->
-                <section id="contrast" class="card bg-base-100 shadow-xl mb-8">
-                    <div class="card-body">
-                        <h2 class="card-title text-2xl mb-4">Making Things Easy to See: Colour Contrast</h2>
-                        <p class="mb-1">About 1 in 12 men and 1 in 200 women have some form of colour blindness. Good contrast helps everyone, but it's especially important for people with visual impairments.</p>
-                        <p class="mb-1">One of the things the Web Content Accessibility Guidelines provide is a formula to check if your colour contrast is accessible or not.</p>
-                        <p class="mb-8 font-bold">Use the interactive colour picker activity below to see if a colour combo meets WCAG standards or not.</p>
+        <!-- Main Content Area - Tab Content -->
+        <main class="glass p-6 md:p-8 min-h-[60vh]">
+            <!-- Introduction Tab -->
+            <section id="introduction" class="tab-content active">
+                <h2 class="text-3xl font-bold mb-6 text-white">Introduction</h2>
+                <div class="space-y-4">
+                    <p class="text-lg">Imagine trying to read a website where the text is so faint you can barely see it, or trying to use a button that's impossible to click.</p>
+                    <p class="text-lg">For many people, these aren't just annoying problems - they're barriers that can make websites completely unusable.</p>
+                    <p class="text-lg">This page demonstrates best practices to use when designing your own website, as well as ways to check if your website is accessible to diverse users.</p>
 
-                        <hr>
-                        <!-- Interactive Contrast Checker -->
-                        <div class="form-control w-full max-w-lg mx-auto mb-8 mt-4">
-                            <h3 class="text-2xl mb-4">Try It Yourself: Contrast Checker</h3>
-                            <p class="mb-6">Click the colours and change them to see the effect it creates.</p>
+                    
 
-                            <div class="flex gap-4 mb-4">
+                    <div class="glass-card p-6 mt-8">
+                        <h3 class="text-xl font-semibold mb-4">What You'll Learn</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>Color contrast and accessibility standards</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>How screen readers interpret web content</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>CARP design principles for better interfaces</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>Core usability principles and their implementation</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card p-6 mt-8 border border-white border-opacity-20 bg-opacity-30 bg-purple-500 bg-blend-soft-light">
+                        <h3 class="text-xl font-semibold mb-3 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                            About This Design: Glassmorphism
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="mb-3">This page uses a design trend called <span class="font-semibold text-purple-300">glassmorphism</span>, characterized by:</p>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start">
+                                        <svg class="w-5 h-5 mr-2 text-purple-300 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>Frosted glass effect with translucency</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-5 h-5 mr-2 text-purple-300 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>Subtle borders that separate elements</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-5 h-5 mr-2 text-purple-300 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>Soft shadows and subtle lighting</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-5 h-5 mr-2 text-purple-300 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>Vibrant background colors that shine through</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p class="mb-3">Glassmorphism creates a sense of depth and dimension while allowing content to stand out clearly. On this page, it helps us:</p>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start">
+                                        <svg class="w-5 h-5 mr-2 text-purple-300 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>Organize content into clear, separate sections</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-5 h-5 mr-2 text-purple-300 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>Highlight interactive elements with visual depth</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-5 h-5 mr-2 text-purple-300 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>Create a modern, visually engaging experience</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end mt-8">
+                        <button class="next-tab px-6 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium hover:opacity-90 transition-opacity flex items-center">
+                            Next: Colour & Contrast
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Color & Contrast Tab -->
+            <section id="color-contrast" class="tab-content">
+                <h2 class="text-3xl font-bold mb-6 text-white">Colour & Contrast</h2>
+                
+                <div class="space-y-6">
+                    <div class="glass-card p-6">
+                        <h3 class="text-xl font-semibold mb-3">Why Contrast Matters</h3>
+                        <p class="mb-2">About 1 in 12 men and 1 in 200 women have some form of colour blindness. Good contrast helps everyone, but it's especially important for people with visual impairments.</p>
+                        <p>The Web Content Accessibility Guidelines (WCAG) provide a formula to check if your colour contrast is accessible or not.</p>
+                    </div>
+
+                    <!-- Interactive Contrast Checker -->
+                    <div class="glass-card p-6 mt-6">
+                        <h3 class="text-xl font-semibold mb-4">Try It Yourself: Contrast Checker</h3>
+                        <p class="mb-6">Click the colours and change them to see the effect it creates.</p>
+
+                        <div class="glass-card p-4 rounded-xl border-2 border-indigo-500 border-opacity-50 shadow-lg shadow-indigo-500/20 mb-6">
+                            <p class="text-center mb-4 flex items-center justify-center">
+                                <svg class="w-5 h-5 mr-2 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                                <span class="font-medium">Interactive: Change colors and see the effect!</span>
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-6 justify-center mb-4">
                                 <div>
-                                    <label class="label">Text Colour</label>
-                                    <input type="color" id="textColor" class="input w-24 h-12" value="#FFFFFF">
+                                    <label class="block mb-2 text-sm font-medium text-center">Text Colour</label>
+                                    <input type="color" id="textColor" class="w-24 h-12 rounded-lg cursor-pointer glass-card p-1 border border-white border-opacity-20" value="#FFFFFF">
                                 </div>
                                 <div>
-                                    <label class="label">Background Colour</label>
-                                    <input type="color" id="bgColor" class="input w-24 h-12" value="#2C3E50">
+                                    <label class="block mb-2 text-sm font-medium text-center">Background Colour</label>
+                                    <input type="color" id="bgColor" class="w-24 h-12 rounded-lg cursor-pointer glass-card p-1 border border-white border-opacity-20" value="#2C3E50">
                                 </div>
                             </div>
-                            <div id="testArea" class="p-8 rounded text-center mb-4" style="background: #2C3E50;">
-                                <span style="color: #FFFFFF;">Sample Button Text</span>
+                            <div id="testArea" class="p-8 rounded-lg text-center mb-4 glass-card" style="background: #2C3E50;">
+                                <span style="color: #FFFFFF;" class="text-lg font-medium">Sample Button Text</span>
                             </div>
-                            <div id="contrastResult" class="alert">
+                            <div id="contrastResult" class="glass-card p-4 rounded-lg mt-4">
                                 Check the contrast by changing colours above
                             </div>
                         </div>
-                        <hr>
-                        <p class="mt-4 mb-2">See what this can look like in HTML:</p>
+                    </div>
 
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-4">
-                            <div class="code-container">
-                                <div class="code-title">Bad vs Good Examples</div>
-                                <pre><code class="language-html">&lt;!-- Poor contrast example --&gt;
+                    <!-- Color Examples -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+                        <div class="code-container">
+                            <div class="code-title">Bad vs Good Examples</div>
+                            <pre><code class="language-html">&lt;!-- Poor contrast example --&gt;
 &lt;div class="bad-example"&gt;
     &lt;p style="color: #CCCCCC; 
               background: #EEEEEE;"&gt;
@@ -148,234 +413,109 @@
         This text is easy to read
     &lt;/p&gt;
 &lt;/div&gt;</code></pre>
-                            </div>
-                            <div>
-                                <div class="preview-title">See the Difference</div>
-                                <div class="space-y-4">
-                                    <div class="p-4 rounded" style="background: #EEEEEE;">
-                                        <p style="color: #CCCCCC;">This text is hard to read because there isn't enough contrast</p>
-                                    </div>
+                        </div>
+                        <div>
+                            <div class="preview-title">See the Difference</div>
+                            <div class="space-y-4">
+                                <div class="p-4 rounded-lg" style="background: #EEEEEE;">
+                                    <p style="color: #CCCCCC;">This text is hard to read because there isn't enough contrast</p>
+                                </div>
 
-                                    <div class="p-4 rounded" style="background: #2C3E50;">
-                                        <p style="color: #FFFFFF;">This text is easy to read because it has good contrast</p>
-                                    </div>
-
-                                    
+                                <div class="p-4 rounded-lg" style="background: #2C3E50;">
+                                    <p style="color: #FFFFFF;">This text is easy to read because it has good contrast</p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Color Palettes -->
+                    <div class="glass-card p-6 mt-8">
+                        <h3 class="text-xl font-semibold mb-4">Colour Palettes: The 60:30:10 Rule</h3>
+                        <p class="mb-6">Good colour choices aren't just about contrast - they're about creating a balanced, professional look. The 60:30:10 rule is commonly used by designers:</p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                            <div class="glass-card bg-opacity-80 bg-indigo-700 p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">60% Primary</h4>
+                                <p class="text-sm opacity-90">Your main colour, used for backgrounds and large areas</p>
+                            </div>
+                            <div class="glass-card bg-opacity-80 bg-purple-600 p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">30% Secondary</h4>
+                                <p class="text-sm opacity-90">Supporting colour for sections and components</p>
+                            </div>
+                            <div class="glass-card bg-opacity-80 bg-pink-500 p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">10% Accent</h4>
+                                <p class="text-sm opacity-90">Highlight colour for buttons and important elements</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Colour Tools -->
+                    <div class="glass-card p-6 mt-6">
+                        <h3 class="text-xl font-semibold mb-4">Helpful Colour Tools</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <a href="https://m2.material.io/design/color/the-color-system.html#tools-for-picking-colors" target="_blank" class="glass-card p-4 hover:bg-opacity-10 transition-all hover:bg-white">
+                                <h4 class="font-semibold">Material Design</h4>
+                                <p class="text-sm opacity-80 mt-1">Google's UI-specific colour palette generator</p>
+                            </a>
                             
+                            <a href="https://color.adobe.com/create/color-wheel" target="_blank" class="glass-card p-4 hover:bg-opacity-10 transition-all hover:bg-white">
+                                <h4 class="font-semibold">Adobe Color Wheel</h4>
+                                <p class="text-sm opacity-80 mt-1">Professional color harmony tool</p>
+                            </a>
+                        
+                            <a href="https://aicolors.co" target="_blank" class="glass-card p-4 hover:bg-opacity-10 transition-all hover:bg-white">
+                                <h4 class="font-semibold">AI Colors</h4>
+                                <p class="text-sm opacity-80 mt-1">Generate a palette from a prompt or 'vibe'</p>
+                            </a>
                         </div>
                     </div>
-                </section>
 
-                <!-- Colour Communication Section -->
-                <section id="color-contrast" class="card bg-base-100 shadow-xl mb-8">
-                    <div class="card-body">
-                        <h2 class="card-title text-2xl mb-4">Colour Communication and Palettes</h2>
-                        <p class="mb-6">Good colour choices aren't just about contrast - they're about creating a balanced, professional look. The 60:30:10 rule is commonly used by designers to purposefully reduce the number of colours used:</p>
-
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                            <div class="card bg-primary text-primary-content">
-                                <div class="card-body">
-                                    <h3 class="card-title">60% Primary</h3>
-                                    <p>Your main colour, used for backgrounds and large areas</p>
-                                </div>
-                            </div>
-                            <div class="card bg-secondary text-secondary-content">
-                                <div class="card-body">
-                                    <h3 class="card-title">30% Secondary</h3>
-                                    <p>Supporting colour for sections and components</p>
-                                </div>
-                            </div>
-                            <div class="card bg-accent text-accent-content">
-                                <div class="card-body">
-                                    <h3 class="card-title">10% Accent</h3>
-                                    <p>Highlight colour for buttons and important elements</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h2 class="card-title text-2xl mb-4">Helpful Colour Tools</h2>
-<p class="mb-4">Professional tools to help create accessible color palettes:</p>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    
-    <a href="https://m2.material.io/design/color/the-color-system.html#tools-for-picking-colors" target="_blank" class="card bg-base-200 hover:bg-base-300 transition-colors">
-        <div class="card-body">
-            <div class="flex items-center gap-3">
-                <div>
-                    <h3 class="font-bold">(RECOMMENDED) Material Design</h3>
-                    <p class="text-sm opacity-70">Google's UI-specific colour palette generator</p>
-                </div>
-            </div>
-        </div>
-    </a>
-    
-    <a href="https://color.adobe.com/create/color-wheel" target="_blank" class="card bg-base-200 hover:bg-base-300 transition-colors">
-        <div class="card-body">
-            <div class="flex items-center gap-3">
-                <div>
-                    <h3 class="font-bold">Adobe Color Wheel</h3>
-                    <p class="text-sm opacity-70">Professional color harmony tool</p>
-                </div>
-            </div>
-        </div>
-    </a>
-
-    
-
-    <a href="https://aicolors.co" target="_blank" class="card bg-base-200 hover:bg-base-300 transition-colors">
-        <div class="card-body">
-            <div class="flex items-center gap-3">
-                <div>
-                    <h3 class="font-bold">AI Colors</h3>
-                    <p class="text-sm opacity-70">Provide a prompt or a 'vibe' and get a colour palette</p>
-                </div>
-            </div>
-        </div>
-    </a>
-</div>
+                    <div class="flex justify-between mt-8">
+                        <button class="prev-tab px-6 py-2 rounded-lg glass-card text-white font-medium hover:bg-opacity-10 hover:bg-white transition-all flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            Previous
+                        </button>
+                        <button class="next-tab px-6 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium hover:opacity-90 transition-opacity flex items-center">
+                            Next: Accessibility
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
                     </div>
-                </section>
+                </div>
+            </section>
 
+            <!-- Screen Readers & ARIA Tab -->
+            <section id="screen-readers" class="tab-content">
+                <h2 class="text-3xl font-bold mb-6 text-white">Accessibility</h2>
                 
+                <div class="space-y-6">
+                    <!-- Screen Readers Section -->
+                    <div class="glass-card p-6">
+                        <h3 class="text-xl font-semibold mb-3">Understanding Screen Readers</h3>
+                        <p class="mb-3">Screen readers are essential tools that convert digital text into synthesised speech, helping people with visual impairments navigate the web.</p>
+                        <p class="mb-4">Check out the video below for an example of how someone with a visual impairment might browse through your website.</p>
 
-
-
-<!-- Screen Reader Section -->
-<section id="screen-readers-aria" class="card bg-base-100 shadow-xl mb-8">
-    <div class="card-body">
-        <h2 class="card-title text-2xl mb-4">Understanding Screen Readers</h2>
-        <p class="mb-1">Screen readers are essential tools that convert digital text into synthesised speech, helping people with visual impairments navigate the web.</p>
-        <p class="mb-6">Check out the video below for an example of how someone with a visual impairment might browse through your website.</p>
-
-        <div class="aspect-video mb-8">
-            <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/dEbl5jvLKGQ" title="How Screen Readers Work" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-
-        <div class="alert alert-info mb-8">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <div>
-                <h3 class="font-bold">Try It Yourself!</h3>
-                <p>Press WIN + CTRL + ENTER to activate Windows Narrator and test how your website sounds to screen reader users.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Typography Section -->
-<section id="typography" class="card bg-base-100 shadow-xl mb-8">
-    <div class="card-body">
-        <h2 class="card-title text-2xl mb-4">Typography & Spacing</h2>
-        <p class="mb-6">Good typography and spacing improves readability and helps users scan content efficiently. Let's explore some key principles:</p>
-
-        <!-- Font Size & Hierarchy -->
-        <div class="bg-base-300 p-6 rounded-lg mb-8">
-            <h3 class="text-xl font-bold mb-4">Font Size Hierarchy</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="space-y-4">
-                    <h4 class="text-lg font-semibold">Bad Example</h4>
-                    <div class="bg-base-100 p-4 rounded">
-                        <h1 style="font-size: 18px; margin: 0;">Main Heading</h1>
-                        <h2 style="font-size: 17px; margin: 0;">Subheading</h2>
-                        <p style="font-size: 16px; margin: 0;">This text has little contrast in size, making it hard to establish visual hierarchy and scan the content effectively.</p>
-                    </div>
-                </div>
-                
-                <div class="space-y-4">
-                    <h4 class="text-lg font-semibold">Good Example</h4>
-                    <div class="bg-base-100 p-4 rounded">
-                        <h1 class="text-4xl font-bold mb-2">Main Heading</h1>
-                        <h2 class="text-2xl mb-2">Subheading</h2>
-                        <p class="text-base">This text has clear size differences, making it easy to understand the content structure.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Line Height & Width -->
-        <div class="bg-base-300 p-6 rounded-lg mb-8">
-            <h3 class="text-xl font-bold mb-4">Line Height & Width</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Poor Readability</h4>
-                    <div class="bg-base-100 p-4 rounded">
-                        <p style="line-height: 1.2; max-width: 100%;" class="mb-4">
-                            This paragraph has tight line spacing and extends across the full width of its container. When lines of text are too long and too close together, it becomes difficult for readers to track from the end of one line to the beginning of the next. This creates cognitive strain and reduces reading comprehension.
-                        </p>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Good Readability</h4>
-                    <div class="bg-base-100 p-4 rounded">
-                        <p style="line-height: 1.6; max-width: 65ch;" class="mb-4">
-                            This paragraph has comfortable line spacing and a controlled line length. The ideal line length is around 65 characters per line. Combined with proper line height, this makes text easy to read and navigate.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Spacing Principles -->
-        <div class="bg-base-300 p-6 rounded-lg">
-            <h3 class="text-xl font-bold mb-4">Spacing: Margin vs Padding</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Margin Example -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Margin (External Spacing)</h4>
-                    <div class="space-y-4">
-                        <div class="bg-primary text-primary-content p-4 rounded relative">
-                            First Element
-                            <div class="absolute inset-x-0 -bottom-4 h-4 bg-error bg-opacity-20"></div>
+                        <div class="aspect-video mb-4 rounded-lg overflow-hidden glass-card p-1">
+                            <iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/dEbl5jvLKGQ" title="How Screen Readers Work" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                        <div class="bg-primary text-primary-content p-4 rounded">
-                            Second Element
+
+                        <div class="glass-card bg-blue-600 bg-opacity-30 p-4 rounded-lg mt-4 flex items-start">
+                            <svg class="w-6 h-6 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <div>
+                                <h4 class="font-bold mb-1">Try It Yourself!</h4>
+                                <p>Press WIN + CTRL + ENTER to activate Windows Narrator and test how your website sounds to screen reader users.</p>
+                            </div>
                         </div>
                     </div>
-                    <p class="text-sm mt-4 opacity-70">The red area shows margin - space between elements</p>
-                </div>
 
-                <!-- Padding Example -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Padding (Internal Spacing)</h4>
-                    <div class="bg-primary text-primary-content rounded relative">
-                        <div class="bg-success bg-opacity-20 p-4">
-                            Content with padding
-                        </div>
-                    </div>
-                    <p class="text-sm mt-4 opacity-70">The green area shows padding - space inside an element</p>
-                </div>
-            </div>
+                    <!-- ARIA and Alt Text -->
+                    <div class="glass-card p-6 mt-6">
+                        <h3 class="text-xl font-semibold mb-3">ARIA Labels and Alt Text</h3>
+                        <p class="mb-4">ARIA labels and alt text are like invisible signs that screen readers use to explain what things are on a webpage.</p>
 
-            <!-- Spacing Tips -->
-            <div class="alert alert-info mt-6">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <div>
-                    <h3 class="font-bold">Spacing Tips</h3>
-                    <ul class="mt-2">
-                        <li>Use margin to separate elements from each other</li>
-                        <li>Use padding to create space between an element's border and its content</li>
-                        <li>Maintain consistent spacing throughout your design</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ARIA Labels Section -->
-<section id="aria" class="card bg-base-100 shadow-xl mb-8">
-    <div class="card-body">
-        <h2 class="card-title text-2xl mb-4">Making Things Clear: ARIA Labels and Alt Text</h2>
-        <p class="mb-1">ARIA labels and alt text are like invisible signs that screen readers use to explain what things are on a webpage.</p>
-        <p class="mb-6">Use WIN + CTRL + ENTER on your keyboard to try this out now. Navigate through the examples using the TAB key to see how they compare.</p>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            <div class="code-container">
-                <div class="code-title">Alt Text Example</div>
-                <pre><code class="language-html">&lt;!-- Bad example: no alt text --&gt;
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                            <div class="code-container">
+                                <div class="code-title">Alt Text Example</div>
+                                <pre><code class="language-html">&lt;!-- Bad example: no alt text --&gt;
 &lt;img 
 src="images/cat.webp"
 class="rounded shadow-lg"
@@ -387,31 +527,31 @@ src="images/cat.webp"
 alt="A cute kitten with a pink background"
 class="rounded shadow-lg"
 /&gt;</code></pre>
-            </div>
-            <div>
-                <div class="preview-title">Example Image</div>
-                <img 
-                    src="images/cat.webp"
-                    alt="A cute kitten with a pink background"
-                    class="rounded-lg shadow-lg mb-4"
-                    width="450"
-                    height="300"
-                    aria-label="Cute kitten with a pink background"
-                />
-                <div class="alert alert-warning">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                    <div>
-                        <h3 class="font-bold">Screen Reader Test</h3>
-                        <p>Without alt text, screen readers might say "image" or skip it entirely. With alt text, users understand what the image shows.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+                            </div>
+                            <div>
+                                <div class="preview-title">Example Image</div>
+                                <img 
+                                    src="images/cat.webp"
+                                    alt="A cute kitten with a pink background"
+                                    class="rounded-lg shadow-lg mb-4"
+                                    width="450"
+                                    height="300"
+                                    aria-label="Cute kitten with a pink background"
+                                />
+                                <div class="glass-card bg-yellow-500 bg-opacity-20 p-4 rounded-lg flex items-start">
+                                    <svg class="w-6 h-6 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                    <div>
+                                        <h4 class="font-bold mb-1">Screen Reader Test</h4>
+                                        <p>Without alt text, screen readers might say "image" or skip it entirely. With alt text, users understand what the image shows.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div class="code-container">
-                <div class="code-title">ARIA Label Example</div>
-                <pre><code class="language-html">&lt;!-- Bad example: unclear button --&gt;
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                            <div class="code-container">
+                                <div class="code-title">ARIA Label Example</div>
+                                <pre><code class="language-html">&lt;!-- Bad example: unclear button --&gt;
 &lt;button&gt;×&lt;/button&gt;
 
 &lt;!-- Good example: clear purpose --&gt;
@@ -423,554 +563,777 @@ Close Menu
 &lt;/span&gt;
 ×
 &lt;/button&gt;</code></pre>
-            </div>
-            <div>
-                <div class="preview-title">Try These Buttons</div>
-                <div class="space-y-4">
-                    <div class="p-4 bg-base-300 rounded">
-                        <p class="mb-2">Without ARIA label:</p>
-                        <button class="btn btn-circle">×</button>
+                            </div>
+                            <div>
+                                <div class="preview-title">Try These Buttons</div>
+                                <div class="space-y-4">
+                                    <div class="glass-card p-4 rounded-lg">
+                                        <p class="mb-2">Without ARIA label:</p>
+                                        <button class="btn btn-circle glass-card">×</button>
+                                    </div>
+
+                                    <div class="glass-card p-4 rounded-lg">
+                                        <p class="mb-2">With ARIA label:</p>
+                                        <button class="btn btn-circle glass-card" aria-label="Close menu">
+                                            <span class="sr-only">Close Menu</span>
+                                            ×
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="p-4 bg-base-300 rounded">
-                        <p class="mb-2">With ARIA label:</p>
-                        <button class="btn btn-circle" aria-label="Close menu">
-                            <span class="sr-only">Close Menu</span>
-                            ×
+                    <!-- Typography Section -->
+                    <div class="glass-card p-6 mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Typography & Spacing</h3>
+                        <p class="mb-4">Good typography and spacing improves readability and helps users scan content efficiently.</p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                            <div class="glass-card p-4 rounded-lg">
+                                <h4 class="font-semibold mb-3">Poor Readability</h4>
+                                <div class="glass-card bg-opacity-10 p-4 rounded-lg">
+                                    <p style="line-height: 1.2; max-width: 100%;" class="mb-4">
+                                        This paragraph has tight line spacing and extends across the full width of its container. When lines of text are too long and too close together, it becomes difficult for readers to track from the end of one line to the beginning of the next. This creates cognitive strain and reduces reading comprehension.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="glass-card p-4 rounded-lg">
+                                <h4 class="font-semibold mb-3">Good Readability</h4>
+                                <div class="glass-card bg-opacity-10 p-4 rounded-lg">
+                                    <p style="line-height: 1.6; max-width: 65ch;" class="mb-4">
+                                        This paragraph has comfortable line spacing and a controlled line length. The ideal line length is around 65 characters per line. Combined with proper line height, this makes text easy to read and navigate.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mt-8">
+                        <button class="prev-tab px-6 py-2 rounded-lg glass-card text-white font-medium hover:bg-opacity-10 hover:bg-white transition-all flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            Previous
+                        </button>
+                        <button class="next-tab px-6 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium hover:opacity-90 transition-opacity flex items-center">
+                            Next: CARP Design
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- CARP Section -->
-<section id="carp" class="card bg-base-100 shadow-xl mb-8">
-    <div class="card-body">
-        <h2 class="card-title text-2xl mb-4">CARP Design Principles</h2>
-        <p class="mb-2">CARP stands for Contrast, Alignment, Repetition, and Proximity. These principles guide effective visual design.</p>
-        <p><strong>Contrast:</strong> Things that LOOK different should BE different. This draws attention to important elements.</p>
-        <p><strong>Alignment:</strong> Things that belong together should line up.</p>
-        <p><strong>Repetition:</strong> The opposite of contrast. All blue buttons should do the same thing, for example.</p>
-        <p class="mb-2"><strong>Proximity:</strong> Related items should be together to show relationships.</p>
-        <p class="mb-1">CARP helps us make user interfaces that just make sense. By lowering cognitive load (or thinking time), your users can use your interface quicker and easier.</p>
-        <p class="mb-6 font-bold">Use your mouse to hover over the interface elements in the example below to see HOW they use CARP effectively.</p>
+            </section>
 
-        <!-- Interactive CARP Example -->
-<div class="bg-base-300 p-6 rounded-lg mb-8">
-    <div class="max-w-2xl mx-auto space-y-8">
-        <!-- Header demonstrating contrast -->
-        <header class="carp-highlight" data-tippy-content="Contrast: Dark background against light text creates strong visual hierarchy. The accent color draws attention to key actions.">
-            <nav class="bg-base-100 p-4 rounded-lg shadow-lg">
-                <div class="flex justify-between items-center">
-                    <h2 class="text-2xl font-bold">TechStore</h2>
-                    <button class="btn btn-primary">Sign Up</button>
-                </div>
-            </nav>
-        </header>
-
-        <!-- Navigation demonstrating alignment -->
-        <nav class="carp-highlight" data-tippy-content="Alignment: Menu items are precisely aligned horizontally, creating a clean and organized appearance that guides the user's eye.">
-            <ul class="flex justify-center gap-8">
-                <li><a href="#" class="link link-hover">Products</a></li>
-                <li><a href="#" class="link link-hover">Features</a></li>
-                <li><a href="#" class="link link-hover">Pricing</a></li>
-                <li><a href="#" class="link link-hover">Support</a></li>
-            </ul>
-        </nav>
-
-        <!-- Product cards demonstrating repetition -->
-        <div class="carp-highlight" data-tippy-content="Repetition: Consistent card layouts, spacing, and button styles create a unified and professional appearance.">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="card bg-base-100 shadow-lg">
-                    <div class="card-body">
-                        <h3 class="card-title">Laptop Pro</h3>
-                        <p class="text-lg font-bold">$999</p>
-                        <button class="btn btn-outline w-full">Learn More</button>
-                    </div>
-                </div>
-                <div class="card bg-base-100 shadow-lg">
-                    <div class="card-body">
-                        <h3 class="card-title">Desktop Max</h3>
-                        <p class="text-lg font-bold">$1499</p>
-                        <button class="btn btn-outline w-full">Learn More</button>
-                    </div>
-                </div>
-                <div class="card bg-base-100 shadow-lg">
-                    <div class="card-body">
-                        <h3 class="card-title">Tablet Air</h3>
-                        <p class="text-lg font-bold">$699</p>
-                        <button class="btn btn-outline w-full">Learn More</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer demonstrating proximity -->
-        <footer class="carp-highlight" data-tippy-content="Proximity: Related contact information is grouped together, while distinct sections maintain clear separation.">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 bg-base-100 p-6 rounded-lg">
-                <div class="space-y-2">
-                    <h4 class="font-bold">Contact</h4>
-                    <p>support@techstore.com</p>
-                    <p>1-800-TECH</p>
-                </div>
-                <div class="space-y-2">
-                    <h4 class="font-bold">Location</h4>
-                    <p>123 Tech Street</p>
-                    <p>Silicon Valley, CA</p>
-                </div>
-                <div class="space-y-2">
-                    <h4 class="font-bold">Follow Us</h4>
-                    <div class="flex gap-4">
-                        <a href="#" class="link">Twitter</a>
-                        <a href="#" class="link">LinkedIn</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-</div>
-
-        <div class="card bg-base-200">
-            <div class="card-body">
-                <div class="text-center space-y-4 mb-6">
-                    <h3 class="text-2xl font-bold">Try It Yourself!</h3>
-                    <p>Toggle between good and bad CARP implementation</p>
-                    <div class="flex items-center justify-center gap-4">
-                        <span class="text-sm">Good CARP</span>
-                        <input type="checkbox" class="toggle toggle-lg toggle-primary" id="carpToggle" />
-                        <span class="text-sm">Bad CARP</span>
-                    </div>
-                </div>
+            <!-- CARP Design Tab -->
+            <section id="carp" class="tab-content">
+                <h2 class="text-3xl font-bold mb-6 text-white">CARP Design Principles</h2>
                 
-                <div id="carpExample" class="bg-base-100 p-6 rounded transition-all duration-300">
-                    <!-- Good Example -->
-                    <div id="goodCarp" class="transition-opacity duration-300">
-                        <header class="text-center mb-8">
-                            <h4 class="text-3xl font-bold mb-2">TechHub Solutions</h4>
-                            <p class="text-lg text-base-content/70">Innovative Technology Solutions</p>
-                        </header>
-        
-                        <nav class="mb-8">
-                            <ul class="flex justify-center gap-8">
-                                <li><a href="#" class="link link-hover">Services</a></li>
-                                <li><a href="#" class="link link-hover">Products</a></li>
-                                <li><a href="#" class="link link-hover">Support</a></li>
-                                <li><a href="#" class="link link-hover">Contact</a></li>
-                            </ul>
-                        </nav>
-        
-                        <div class="grid grid-cols-3 gap-4 mb-8">
-                            <div class="card bg-base-200">
-                                <div class="card-body">
-                                    <h5 class="card-title">Cloud Services</h5>
-                                    <p>Enterprise cloud solutions</p>
-                                    <button class="btn btn-primary mt-4">Learn More</button>
-                                </div>
-                            </div>
-                            <div class="card bg-base-200">
-                                <div class="card-body">
-                                    <h5 class="card-title">Security</h5>
-                                    <p>Advanced security systems</p>
-                                    <button class="btn btn-primary mt-4">Learn More</button>
-                                </div>
-                            </div>
-                            <div class="card bg-base-200">
-                                <div class="card-body">
-                                    <h5 class="card-title">Analytics</h5>
-                                    <p>Data-driven insights</p>
-                                    <button class="btn btn-primary mt-4">Learn More</button>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <footer class="text-center space-y-2">
-                            <div class="font-bold">Contact Us</div>
-                            <p>support@techhub.com</p>
-                            <p>1-800-TECH-HUB</p>
-                        </footer>
-                    </div>
-        
-                    <!-- Bad Example -->
-                    <div id="badCarp" class="hidden transition-opacity duration-300">
-                        <h4 class="text-left mb-2" style="font-size: 24px;">TechHub Solutions</h4>
-                        <p style="text-align: center; color: #666;">Innovative Technology Solutions</p>
-                        
-                        <div style="margin: 20px 0;">
-                            <a href="#" style="margin-right: 15px;">Services</a>
-                            <a href="#" style="margin-right: 25px;">Products</a>
-                            <a href="#" style="margin-right: 10px;">Support</a>
-                            <a href="#">Contact</a>
-                        </div>
-        
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-                            <div style="border: 1px solid #ccc; padding: 15px;">
-                                <h5 style="color: blue;">Cloud Services</h5>
-                                <p style="font-size: 14px;">Enterprise cloud solutions</p>
-                                <button style="background: green; color: white; padding: 5px 10px;">Click Here</button>
-                            </div>
-                            <div style="border: 2px solid #999; padding: 20px;">
-                                <h5 style="color: red;">Security</h5>
-                                <p style="font-size: 13px;">Advanced security systems</p>
-                                <button style="background: blue; color: white; padding: 8px 12px;">More Info</button>
-                            </div>
-                            <div style="border: 1px solid #ddd; padding: 18px;">
-                                <h5 style="color: purple;">Analytics</h5>
-                                <p style="font-size: 15px;">Data-driven insights</p>
-                                <button style="background: red; color: white; padding: 6px 15px;">Details</button>
-                            </div>
-                        </div>
-        
-                        <div style="margin-top: 30px;">
-                            <p style="text-align: right; font-weight: bold;">Contact Us</p>
-                            <p style="text-align: center;">support@techhub.com</p>
-                            <p style="text-align: left;">1-800-TECH-HUB</p>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Explanation Panel -->
-                <div class="mt-6 alert" id="carpExplanation">
-                    <!-- Content will be injected by JavaScript -->
-                </div>
-            </div>
-        </div>
-</section>
+                <div class="space-y-6">
+                    <div class="glass-card p-6">
+                        <h3 class="text-xl font-semibold mb-3">Understanding CARP</h3>
+                        <p class="mb-4">CARP stands for Contrast, Alignment, Repetition, and Proximity. These principles guide effective visual design.</p>
 
-<!-- Usability Principles Section -->
-<section id="usability" class="card bg-base-100 shadow-xl mb-8">
-    <div class="card-body">
-        <h2 class="card-title text-2xl mb-4">Usability Principles in Action</h2>
-        <p class="mb-1">Another way of ensuring our web experiences are accessible is by evaluating them using the 5 useability principles:</p>
-        <ul>
-            <li class ="mb-1"><strong>Accessibility:</strong> Ability to be used by many different people, even people with disabilities</li>
-            <li class ="mb-1"><strong>Effectiveness:</strong> Ability of users to use the system to do the work they need to do, includes reliability</li>
-            <li class ="mb-1"><strong>Safety:</strong> Ability for users to make errors and recover from the mistake</li>
-            <li class ="mb-1"><strong>Utility:</strong> Ability of the system to provide all the functionality that users need</li>
-            <li class ="mb-1"><strong>Learnability:</strong> How easy a system is to learn</li>
-          </ul>
-          
-        <p class="mb-6 font-bold">Hover over the different examples below to see how they implement key usability principles.</p>
-
-        <div class="bg-base-300 p-6 rounded-lg mb-8">
-            <div class="max-w-3xl mx-auto space-y-6">
-                <!-- Accessibility Example -->
-                <div class="bg-base-100 p-4 rounded-lg shadow-lg" data-tippy-content="Accessibility: High contrast text, keyboard navigation, and screen reader support make the interface usable by people with various abilities.">
-                    <nav class="flex flex-wrap gap-4" role="navigation" aria-label="Main">
-                        <button class="btn" tabindex="0">
-                            <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                            </svg>
-                            Home
-                            <span class="sr-only">Return to homepage</span>
-                        </button>
-                        <button class="btn btn-outline">
-                            <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-                            </svg>
-                            Inbox
-                            <span class="sr-only">Open inbox with 3 new messages</span>
-                        </button>
-                    </nav>
-                </div>
-
-                <!-- Effectiveness Example -->
-                <div class="bg-base-100 p-4 rounded-lg" data-tippy-content="Effectiveness: Quick actions and shortcuts help users complete tasks efficiently and reliably.">
-                    <div class="flex flex-wrap gap-4 mb-4">
-                        <button class="btn btn-primary">
-                            <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                            </svg>
-                            New Document
-                        </button>
-                        <div class="flex-1">
-                            <input type="text" placeholder="Quick search..." class="input input-bordered w-full" />
-                        </div>
-                    </div>
-                    <div class="text-sm opacity-70">
-                        Pro tip: Press Ctrl+N for new document, Ctrl+F to search
-                    </div>
-                </div>
-
-                <!-- Safety Example -->
-                <div class="bg-base-100 p-4 rounded-lg" data-tippy-content="Safety: Clear warnings and undo options prevent accidents and help users recover from mistakes.">
-                    <div class="alert alert-warning mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                        </svg>
-                        <div>
-                            <h3 class="font-bold">Delete 3 items?</h3>
-                            <div class="mt-2">
-                                <button class="btn btn-sm btn-error mr-2">Delete</button>
-                                <button class="btn btn-sm">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
-                        </svg>
-                        <span class="text-sm">Action undone. <button class="link link-primary">Redo?</button></span>
-                    </div>
-                </div>
-
-                <!-- Utility Example -->
-                <div class="bg-base-100 p-4 rounded-lg" data-tippy-content="Utility: All necessary tools and features are available and logically organized.">
-                    <div class="tabs tabs-boxed mb-4">
-                        <button class="tab tab-active">Edit</button>
-                        <button class="tab">Format</button>
-                        <button class="tab">View</button>
-                        <button class="tab">Tools</button>
-                    </div>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                        <button class="btn btn-sm btn-ghost">
-                            <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                            Copy
-                        </button>
-                        <button class="btn btn-sm btn-ghost">
-                            <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                            Delete
-                        </button>
-                        <button class="btn btn-sm btn-ghost">
-                            <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                            </svg>
-                            Share
-                        </button>
-                        <button class="btn btn-sm btn-ghost">
-                            <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
-                            </svg>
-                            Export
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Learnability Example -->
-                <div class="bg-base-100 p-4 rounded-lg" data-tippy-content="Learnability: Clear labels, consistent patterns, and helpful tooltips make the interface easy to learn.">
-                    <div class="flex flex-col gap-4">
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Project Name</span>
-                                <span class="label-text-alt" data-tippy-content="Give your project a unique name">
-                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <div class="glass-card p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2 text-purple-300 flex items-center">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
-                                </span>
-                            </label>
-                            <input type="text" placeholder="My New Project" class="input input-bordered" />
+                                    Contrast
+                                </h4>
+                                <p>Text and content should be easily readable. Important things should stand out.</p>
+                            </div>
+                            <div class="glass-card p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2 text-blue-300 flex items-center">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                                    </svg>
+                                    Alignment
+                                </h4>
+                                <p>Elements should be aligned with each other to create order and organization. Nothing should be placed arbitrarily on the page.</p>
+                            </div>
+                            <div class="glass-card p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2 text-pink-300 flex items-center">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                                    </svg>
+                                    Repetition
+                                </h4>
+                                <p>Reuse visual elements throughout the design to create unity and consistency. Similar functions should look similar.</p>
+                            </div>
+                            <div class="glass-card p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2 text-green-300 flex items-center">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3a1 1 0 112 0v1a1 1 0 11-2 0V3zM15.364 5.636a1 1 0 111.414 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707zM18 10a1 1 0 110 2h-1a1 1 0 110-2h1zM15.364 14.364a1 1 0 111.414 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707zM12 18a1 1 0 110 2v-1a1 1 0 110-2v1zM8.636 14.364a1 1 0 11-1.414 1.414l.707-.707a1 1 0 111.414 1.414l-.707.707zM6 10a1 1 0 110 2h1a1 1 0 110-2H6zM8.636 5.636a1 1 0 10-1.414 1.414l.707.707a1 1 0 101.414-1.414l-.707-.707z" />
+                                    </svg>
+                                    Proximity
+                                </h4>
+                                <p>Group related items together visually. Physical closeness implies a relationship between elements, making information easier to understand and scan.</p>
+                            </div>
                         </div>
-                        <div class="alert alert-info">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+
+                        <p class="mt-4">CARP helps us make user interfaces that just make sense. By lowering cognitive load (or thinking time), your users can use your interface quicker and easier.</p>
+                        <p class="font-medium mt-2">Use your mouse to hover over the interface elements in the example below to see HOW they use CARP effectively.</p>
+                    </div>
+
+                    <!-- Interactive CARP Example -->
+                    <div class="glass-card p-6 mt-6 relative">
+                        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-bold flex items-center animate-pulse">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path>
                             </svg>
-                            <span>Tip: You can use letters, numbers, and dashes</span>
+                            Hover over elements to see CARP principles in action!
+                        </div>
+                        
+                        <div class="max-w-2xl mx-auto space-y-8">
+                            <!-- Header demonstrating contrast -->
+                            <header class="carp-highlight glass-card" data-tippy-content="Contrast: Dark background against light text creates strong visual hierarchy. The accent color draws attention to key actions.">
+                                <nav class="p-4 rounded-lg">
+                                    <div class="flex justify-between items-center">
+                                        <h2 class="text-xl font-bold">TechStore</h2>
+                                        <button class="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-600 text-white">Sign Up</button>
+                                    </div>
+                                </nav>
+                            </header>
+
+                            <!-- Navigation demonstrating alignment -->
+                            <nav class="carp-highlight glass-card p-3" data-tippy-content="Alignment: Menu items are precisely aligned horizontally, creating a clean and organized appearance that guides the user's eye.">
+                                <ul class="flex justify-center gap-8">
+                                    <li><a href="#" class="hover:text-purple-300 transition-colors">Products</a></li>
+                                    <li><a href="#" class="hover:text-purple-300 transition-colors">Features</a></li>
+                                    <li><a href="#" class="hover:text-purple-300 transition-colors">Pricing</a></li>
+                                    <li><a href="#" class="hover:text-purple-300 transition-colors">Support</a></li>
+                                </ul>
+                            </nav>
+
+                            <!-- Product cards demonstrating repetition -->
+                            <div class="carp-highlight" data-tippy-content="Repetition: Consistent card layouts, spacing, and button styles create a unified and professional appearance.">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="glass-card p-4 rounded-lg">
+                                        <h3 class="font-semibold mb-2">Laptop Pro</h3>
+                                        <p class="text-lg font-bold text-purple-300">$999</p>
+                                        <button class="w-full mt-3 px-4 py-2 rounded-lg glass-card hover:bg-opacity-10 hover:bg-white transition-colors">Learn More</button>
+                                    </div>
+                                    <div class="glass-card p-4 rounded-lg">
+                                        <h3 class="font-semibold mb-2">Desktop Max</h3>
+                                        <p class="text-lg font-bold text-purple-300">$1499</p>
+                                        <button class="w-full mt-3 px-4 py-2 rounded-lg glass-card hover:bg-opacity-10 hover:bg-white transition-colors">Learn More</button>
+                                    </div>
+                                    <div class="glass-card p-4 rounded-lg">
+                                        <h3 class="font-semibold mb-2">Tablet Air</h3>
+                                        <p class="text-lg font-bold text-purple-300">$699</p>
+                                        <button class="w-full mt-3 px-4 py-2 rounded-lg glass-card hover:bg-opacity-10 hover:bg-white transition-colors">Learn More</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Footer demonstrating proximity -->
+                            <footer class="carp-highlight glass-card p-4" data-tippy-content="Proximity: Related contact information is grouped together, while distinct sections maintain clear separation.">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="space-y-2">
+                                        <h4 class="font-semibold">Contact</h4>
+                                        <p class="text-sm opacity-90">support@techstore.com</p>
+                                        <p class="text-sm opacity-90">1-800-TECH</p>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <h4 class="font-semibold">Location</h4>
+                                        <p class="text-sm opacity-90">123 Tech Street</p>
+                                        <p class="text-sm opacity-90">Silicon Valley, CA</p>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <h4 class="font-semibold">Follow Us</h4>
+                                        <div class="flex gap-4">
+                                            <a href="#" class="text-sm hover:text-purple-300 transition-colors">Twitter</a>
+                                            <a href="#" class="text-sm hover:text-purple-300 transition-colors">LinkedIn</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </footer>
                         </div>
                     </div>
+
+                    <!-- Toggle Example -->
+                    <div class="glass-card p-6 mt-6">
+                        <div class="text-center space-y-4 mb-6">
+                            <h3 class="text-xl font-semibold">Try It Yourself!</h3>
+                            <p>Toggle between good and bad CARP implementation</p>
+                            <div class="glass-card p-4 rounded-xl bg-opacity-30 border-2 border-purple-500 border-opacity-50 shadow-lg shadow-purple-500/20 animate-pulse">
+                                <div class="flex items-center justify-center gap-4">
+                                    <span class="text-sm font-medium text-green-300">Good CARP</span>
+                                    <input type="checkbox" class="toggle toggle-lg toggle-primary" id="carpToggle" />
+                                    <span class="text-sm font-medium text-red-300">Bad CARP</span>
+                                </div>
+                                <p class="text-xs mt-3 opacity-80">👆 Click the toggle to switch between examples</p>
+                            </div>
+                        </div>
+                        
+                        <div id="carpExample" class="glass-card p-6 rounded-lg">
+                            <!-- Good Example -->
+                            <div id="goodCarp" class="transition-opacity duration-300">
+                                <header class="text-center mb-8">
+                                    <h4 class="text-2xl font-bold mb-2">TechHub Solutions</h4>
+                                    <p class="text-lg opacity-80">Innovative Technology Solutions</p>
+                                </header>
+                
+                                <nav class="mb-8">
+                                    <ul class="flex justify-center gap-8">
+                                        <li><a href="#" class="hover:text-purple-300 transition-colors">Services</a></li>
+                                        <li><a href="#" class="hover:text-purple-300 transition-colors">Products</a></li>
+                                        <li><a href="#" class="hover:text-purple-300 transition-colors">Support</a></li>
+                                        <li><a href="#" class="hover:text-purple-300 transition-colors">Contact</a></li>
+                                    </ul>
+                                </nav>
+                
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                                    <div class="glass-card">
+                                        <div class="p-4">
+                                            <h5 class="font-semibold mb-2">Cloud Services</h5>
+                                            <p class="text-sm opacity-90">Enterprise cloud solutions</p>
+                                            <button class="mt-4 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-600 text-white w-full">Learn More</button>
+                                        </div>
+                                    </div>
+                                    <div class="glass-card">
+                                        <div class="p-4">
+                                            <h5 class="font-semibold mb-2">Security</h5>
+                                            <p class="text-sm opacity-90">Advanced security systems</p>
+                                            <button class="mt-4 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-600 text-white w-full">Learn More</button>
+                                        </div>
+                                    </div>
+                                    <div class="glass-card">
+                                        <div class="p-4">
+                                            <h5 class="font-semibold mb-2">Analytics</h5>
+                                            <p class="text-sm opacity-90">Data-driven insights</p>
+                                            <button class="mt-4 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-600 text-white w-full">Learn More</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <footer class="text-center space-y-2">
+                                    <div class="font-semibold">Contact Us</div>
+                                    <p class="text-sm opacity-90">support@techhub.com</p>
+                                    <p class="text-sm opacity-90">1-800-TECH-HUB</p>
+                                </footer>
+                            </div>
+                
+                            <!-- Bad Example -->
+                            <div id="badCarp" class="hidden transition-opacity duration-300">
+                                <h4 class="text-left mb-2" style="font-size: 24px;">TechHub Solutions</h4>
+                                <p style="text-align: center; color: #aaa;">Innovative Technology Solutions</p>
+                                
+                                <div style="margin: 20px 0;">
+                                    <a href="#" style="margin-right: 15px;">Services</a>
+                                    <a href="#" style="margin-right: 25px;">Products</a>
+                                    <a href="#" style="margin-right: 10px;">Support</a>
+                                    <a href="#">Contact</a>
+                                </div>
+                
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                                    <div style="border: 1px solid rgba(255,255,255,0.2); padding: 15px; border-radius: 8px;">
+                                        <h5 style="color: #9f7aea;">Cloud Services</h5>
+                                        <p style="font-size: 14px;">Enterprise cloud solutions</p>
+                                        <button style="background: #9f7aea; color: white; padding: 5px 10px; border-radius: 4px; margin-top: 10px;">Click Here</button>
+                                    </div>
+                                    <div style="border: 2px solid rgba(255,255,255,0.3); padding: 20px; border-radius: 8px;">
+                                        <h5 style="color: #f687b3;">Security</h5>
+                                        <p style="font-size: 13px;">Advanced security systems</p>
+                                        <button style="background: #6c5ce7; color: white; padding: 8px 12px; border-radius: 8px; margin-top: 10px;">More Info</button>
+                                    </div>
+                                    <div style="border: 1px solid rgba(255,255,255,0.1); padding: 18px; border-radius: 8px;">
+                                        <h5 style="color: #81e6d9;">Analytics</h5>
+                                        <p style="font-size: 15px;">Data-driven insights</p>
+                                        <button style="background: #e84393; color: white; padding: 6px 15px; border-radius: 6px; margin-top: 10px;">Details</button>
+                                    </div>
+                                </div>
+                
+                                <div style="margin-top: 30px;">
+                                    <p style="text-align: right; font-weight: bold;">Contact Us</p>
+                                    <p style="text-align: center;">support@techhub.com</p>
+                                    <p style="text-align: left;">1-800-TECH-HUB</p>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Explanation Panel -->
+                        <div class="mt-6 glass-card p-4 rounded-lg" id="carpExplanation">
+                            <!-- Content will be injected by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mt-8">
+                        <button class="prev-tab px-6 py-2 rounded-lg glass-card text-white font-medium hover:bg-opacity-10 hover:bg-white transition-all flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            Previous
+                        </button>
+                        <button class="next-tab px-6 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium hover:opacity-90 transition-opacity flex items-center">
+                            Next: Usability
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </section>
+
+            <!-- Usability Principles Tab -->
+            <section id="usability" class="tab-content">
+                <h2 class="text-3xl font-bold mb-6 text-white">Usability Principles</h2>
+                
+                <div class="space-y-6">
+                    <div class="glass-card p-6">
+                        <h3 class="text-xl font-semibold mb-3">5 Core Usability Principles</h3>
+                        <p class="mb-4">Another way of ensuring our web experiences are accessible is by evaluating them using these 5 useability principles:</p>
+
+                        <div class="space-y-3 mt-4">
+                            <div class="glass-card p-3 rounded-lg">
+                                <h4 class="font-semibold text-purple-300">Accessibility</h4>
+                                <p class="text-sm opacity-90">Ability to be used by many different people, even people with disabilities</p>
+                            </div>
+                            <div class="glass-card p-3 rounded-lg">
+                                <h4 class="font-semibold text-blue-300">Effectiveness</h4>
+                                <p class="text-sm opacity-90">Ability of users to use the system to do the work they need to do, includes reliability</p>
+                            </div>
+                            <div class="glass-card p-3 rounded-lg">
+                                <h4 class="font-semibold text-green-300">Safety</h4>
+                                <p class="text-sm opacity-90">Ability for users to make errors and recover from the mistake</p>
+                            </div>
+                            <div class="glass-card p-3 rounded-lg">
+                                <h4 class="font-semibold text-yellow-300">Utility</h4>
+                                <p class="text-sm opacity-90">Ability of the system to provide all the functionality that users need</p>
+                            </div>
+                            <div class="glass-card p-3 rounded-lg">
+                                <h4 class="font-semibold text-pink-300">Learnability</h4>
+                                <p class="text-sm opacity-90">How easy a system is to learn</p>
+                            </div>
+                        </div>
+
+                        <p class="mt-4 font-medium">Hover over the different examples below to see how they implement key usability principles.</p>
+                    </div>
+
+                    <!-- Usability Examples -->
+                    <div class="glass-card p-6 mt-6">
+                        <div class="max-w-3xl mx-auto space-y-6">
+                            <!-- Accessibility Example -->
+                            <div class="glass-card p-4 rounded-lg" data-tippy-content="Accessibility: High contrast text, keyboard navigation, and screen reader support make the interface usable by people with various abilities.">
+                                <h4 class="font-semibold mb-3 text-purple-300">Accessibility</h4>
+                                <nav class="flex flex-wrap gap-4" role="navigation" aria-label="Main">
+                                    <button class="glass-card px-4 py-2 rounded-lg flex items-center" tabindex="0">
+                                        <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                        </svg>
+                                        Home
+                                        <span class="sr-only">Return to homepage</span>
+                                    </button>
+                                    <button class="glass-card px-4 py-2 rounded-lg flex items-center">
+                                        <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                                        </svg>
+                                        Inbox
+                                        <span class="sr-only">Open inbox with 3 new messages</span>
+                                    </button>
+                                </nav>
+                            </div>
+
+                            <!-- Effectiveness Example -->
+                            <div class="glass-card p-4 rounded-lg" data-tippy-content="Effectiveness: Quick actions and shortcuts help users complete tasks efficiently and reliably.">
+                                <h4 class="font-semibold mb-3 text-blue-300">Effectiveness</h4>
+                                <div class="flex flex-wrap gap-4 mb-4">
+                                    <button class="px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-white flex items-center">
+                                        <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                        </svg>
+                                        New Document
+                                    </button>
+                                    <div class="flex-1">
+                                        <input type="text" placeholder="Quick search..." class="w-full px-4 py-2 rounded-lg glass-card bg-opacity-10 bg-white" />
+                                    </div>
+                                </div>
+                                <div class="text-sm opacity-70">
+                                    Pro tip: Press Ctrl+N for new document, Ctrl+F to search
+                                </div>
+                            </div>
+
+                            <!-- Safety Example -->
+                            <div class="glass-card p-4 rounded-lg" data-tippy-content="Safety: Clear warnings and undo options prevent accidents and help users recover from mistakes.">
+                                <h4 class="font-semibold mb-3 text-green-300">Safety</h4>
+                                <div class="glass-card bg-red-500 bg-opacity-20 p-4 rounded-lg mb-4 flex items-start">
+                                    <svg class="w-6 h-6 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-bold mb-2">Delete 3 items?</h4>
+                                        <div class="flex gap-2">
+                                            <button class="glass-card bg-red-500 bg-opacity-30 px-3 py-1 rounded-lg">Delete</button>
+                                            <button class="glass-card px-3 py-1 rounded-lg">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+                                    </svg>
+                                    <span class="text-sm">Action undone. <button class="text-purple-300 hover:underline">Redo?</button></span>
+                                </div>
+                            </div>
+
+                            <!-- Utility Example -->
+                            <div class="glass-card p-4 rounded-lg" data-tippy-content="Utility: All necessary tools and features are available and logically organized.">
+                                <h4 class="font-semibold mb-3 text-yellow-300">Utility</h4>
+                                <div class="flex mb-4 overflow-x-auto">
+                                    <button class="glass-card bg-purple-500 bg-opacity-20 px-4 py-2 rounded-l-lg">Edit</button>
+                                    <button class="glass-card px-4 py-2">Format</button>
+                                    <button class="glass-card px-4 py-2">View</button>
+                                    <button class="glass-card px-4 py-2 rounded-r-lg">Tools</button>
+                                </div>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                    <button class="glass-card p-2 rounded-lg flex items-center justify-center">
+                                        <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        Copy
+                                    </button>
+                                    <button class="glass-card p-2 rounded-lg flex items-center justify-center">
+                                        <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                        Delete
+                                    </button>
+                                    <button class="glass-card p-2 rounded-lg flex items-center justify-center">
+                                        <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                        </svg>
+                                        Share
+                                    </button>
+                                    <button class="glass-card p-2 rounded-lg flex items-center justify-center">
+                                        <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                                        </svg>
+                                        Export
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Learnability Example -->
+                            <div class="glass-card p-4 rounded-lg" data-tippy-content="Learnability: Clear labels, consistent patterns, and helpful tooltips make the interface easy to learn.">
+                                <h4 class="font-semibold mb-3 text-pink-300">Learnability</h4>
+                                <div class="space-y-4">
+                                    <div class="space-y-2">
+                                        <div class="flex justify-between items-center">
+                                            <label class="block text-sm font-medium">Project Name</label>
+                                            <span class="text-xs opacity-70 cursor-help" data-tippy-content="Give your project a unique name">
+                                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <input type="text" placeholder="My New Project" class="w-full px-4 py-2 rounded-lg glass-card bg-opacity-10 bg-white" />
+                                    </div>
+                                    <div class="glass-card bg-blue-500 bg-opacity-20 p-3 rounded-lg flex items-center">
+                                        <svg class="w-4 h-4 mr-2 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        <span class="text-sm">Tip: You can use letters, numbers, and dashes</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mt-8">
+                        <button class="prev-tab px-6 py-2 rounded-lg glass-card text-white font-medium hover:bg-opacity-10 hover:bg-white transition-all flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            Previous
+                        </button>
+                        <button class="next-tab px-6 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium hover:opacity-90 transition-opacity flex items-center">
+                            Next: Resources
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resources Tab -->
+            <section id="resources" class="tab-content">
+                <h2 class="text-3xl font-bold mb-6 text-white">Additional Resources</h2>
+                
+                <div class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <a href="https://www.youtube.com/watch?v=3f31oufqFSM" target="_blank" 
+                        class="glass-card p-5 rounded-lg hover:bg-opacity-10 hover:bg-white transition-all duration-300">
+                            <div class="flex items-center gap-4">
+                                <div class="text-3xl">🎥</div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1">Web Accessibility Perspectives</h3>
+                                    <p class="text-sm opacity-80">A video to empathise with how diverse users access the web</p>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a href="https://webaim.org/resources/contrastchecker/" target="_blank" 
+                        class="glass-card p-5 rounded-lg hover:bg-opacity-10 hover:bg-white transition-all duration-300">
+                            <div class="flex items-center gap-4">
+                                <div class="text-3xl">🎨</div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1">WebAIM Contrast Checker</h3>
+                                    <p class="text-sm opacity-80">Free tool to check color contrast ratios</p>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a href="https://wave.webaim.org/" target="_blank" 
+                        class="glass-card p-5 rounded-lg hover:bg-opacity-10 hover:bg-white transition-all duration-300">
+                            <div class="flex items-center gap-4">
+                                <div class="text-3xl">🔍</div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1">WAVE Evaluation Tool</h3>
+                                    <p class="text-sm opacity-80">Test a website for accessibility issues</p>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a href="https://www.a11yproject.com/" target="_blank" 
+                        class="glass-card p-5 rounded-lg hover:bg-opacity-10 hover:bg-white transition-all duration-300">
+                            <div class="flex items-center gap-4">
+                                <div class="text-3xl">💡</div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1">The A11Y Project</h3>
+                                    <p class="text-sm opacity-80">Community-driven accessibility resources</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="https://m3.material.io/components" target="_blank" 
+                        class="glass-card p-5 rounded-lg hover:bg-opacity-10 hover:bg-white transition-all duration-300">
+                            <div class="flex items-center gap-4">
+                                <div class="text-3xl">🎓</div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1">Google Material Design Components</h3>
+                                    <p class="text-sm opacity-80">An explicit look at different UI component designs</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    
+
+                    <div class="flex justify-start mt-8">
+                        <button class="prev-tab px-6 py-2 rounded-lg glass-card text-white font-medium hover:bg-opacity-10 hover:bg-white transition-all flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            Previous
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Mobile Tab Navigation -->
+        <nav class="mobile-tabs p-2 md:hidden flex overflow-x-auto">
+            <button class="tab-btn active flex-1 flex flex-col items-center py-3" data-tab="introduction">
+                <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Intro
+            </button>
+            <button class="tab-btn flex-1 flex flex-col items-center py-3" data-tab="color-contrast">
+                <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                </svg>
+                Color
+            </button>
+            <button class="tab-btn flex-1 flex flex-col items-center py-3" data-tab="screen-readers">
+                <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+                Access
+            </button>
+            <button class="tab-btn flex-1 flex flex-col items-center py-3" data-tab="carp">
+                <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                </svg>
+                CARP
+            </button>
+            <button class="tab-btn flex-1 flex flex-col items-center py-3" data-tab="usability">
+                <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path>
+                </svg>
+                UX
+            </button>
+            <button class="tab-btn flex-1 flex flex-col items-center py-3" data-tab="resources">
+                <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                Links
+            </button>
+        </nav>
     </div>
-</section>
-
-<!-- Additional Resources Section -->
-<section id="resources" class="card bg-base-100 shadow-xl mb-8">
-    <div class="card-body">
-        <h2 class="card-title text-2xl mb-4">Additional Resources</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <a href="https://www.youtube.com/watch?v=3f31oufqFSM" target="_blank" 
-               class="card bg-base-200 hover:bg-base-300 transition-all duration-300">
-                <div class="card-body flex flex-row items-center gap-4">
-                    <div class="text-2xl">🎥</div>
-                    <div>
-                        <h3 class="font-bold">Web Accessibility Perspectives</h3>
-                        <p class="text-sm opacity-70">A video to empathise with how diverse users access the web</p>
-                    </div>
-                </div>
-            </a>
-            
-            <a href="https://webaim.org/resources/contrastchecker/" target="_blank" 
-               class="card bg-base-200 hover:bg-base-300 transition-all duration-300">
-                <div class="card-body flex flex-row items-center gap-4">
-                    <div class="text-2xl">🎨</div>
-                    <div>
-                        <h3 class="font-bold">WebAIM Contrast Checker</h3>
-                        <p class="text-sm opacity-70">Free tool to check color contrast ratios</p>
-                    </div>
-                </div>
-            </a>
-            
-            <a href="https://wave.webaim.org/" target="_blank" 
-               class="card bg-base-200 hover:bg-base-300 transition-all duration-300">
-                <div class="card-body flex flex-row items-center gap-4">
-                    <div class="text-2xl">🔍</div>
-                    <div>
-                        <h3 class="font-bold">WAVE Evaluation Tool</h3>
-                        <p class="text-sm opacity-70">Test a website for accessibility issues</p>
-                    </div>
-                </div>
-            </a>
-            
-            <a href="https://www.a11yproject.com/" target="_blank" 
-               class="card bg-base-200 hover:bg-base-300 transition-all duration-300">
-                <div class="card-body flex flex-row items-center gap-4">
-                    <div class="text-2xl">💡</div>
-                    <div>
-                        <h3 class="font-bold">The A11Y Project</h3>
-                        <p class="text-sm opacity-70">Community-driven accessibility resources</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="https://m3.material.io/components" target="_blank" 
-               class="card bg-base-200 hover:bg-base-300 transition-all duration-300">
-                <div class="card-body flex flex-row items-center gap-4">
-                    <div class="text-2xl">🎓</div>
-                    <div>
-                        <h3 class="font-bold">Google Material Design Components</h3>
-                        <p class="text-sm opacity-70">An explicit look at different UI component designs</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-</section>
-
-</div>
-</div>
-
-<!-- Drawer Side -->
-<div class="drawer-side">
-    <label for="my-drawer" class="drawer-overlay"></label>
-    <ul class="menu p-4 w-80 h-full bg-base-100 text-base-content">
-        <li><a href="#introduction">Introduction</a></li>
-        <li><a href="#color-contrast">Colour & Contrast</a></li>
-        <li><a href="#screen-readers-aria">Screen Readers & ARIA</a></li>
-        <li><a href="#carp">CARP</a></li>
-        <li><a href="#usability">Usability Principles</a></li>
-        <li><a href="#resources">Additional Resources</a></li>
-    </ul>
-</div>
-</div>
 
 <script>
-// Initialize Tippy.js tooltips
-tippy('[data-tippy-content]', {
-theme: 'light',
-placement: 'top',
-arrow: true
-});
-
-// Color contrast checker
-function calculateContrast(color1, color2) {
-const hex2rgb = hex => {
-const r = parseInt(hex.slice(1,3), 16);
-const g = parseInt(hex.slice(3,5), 16);
-const b = parseInt(hex.slice(5,7), 16);
-return [r, g, b];
-};
-
-const luminance = rgb => {
-const [r, g, b] = rgb.map(v => {
-    v /= 255;
-    return v <= 0.03928 ? v/12.92 : Math.pow((v + 0.055)/1.055, 2.4);
-});
-return 0.2126 * r + 0.7152 * g + 0.0722 * b;
-};
-
-const rgb1 = hex2rgb(color1);
-const rgb2 = hex2rgb(color2);
-const l1 = luminance(rgb1);
-const l2 = luminance(rgb2);
-
-const contrast = (Math.max(l1, l2) + 0.05)/(Math.min(l1, l2) + 0.05);
-return contrast.toFixed(2);
-}
-
-function updateContrast() {
-const textColor = document.getElementById('textColor').value;
-const bgColor = document.getElementById('bgColor').value;
-const testArea = document.getElementById('testArea');
-const result = document.getElementById('contrastResult');
-
-testArea.style.backgroundColor = bgColor;
-testArea.querySelector('span').style.color = textColor;
-
-const ratio = calculateContrast(textColor, bgColor);
-const passes = ratio >= 4.5;
-
-result.className = `alert ${passes ? 'alert-success' : 'alert-error'}`;
-result.textContent = `Contrast ratio: ${ratio}:1 - ${passes ? 'Passes' : 'Fails'} WCAG standards`;
-}
-
-// Add event listeners
-document.getElementById('textColor').addEventListener('input', updateContrast);
-document.getElementById('bgColor').addEventListener('input', updateContrast);
-
-// Initial contrast check
-updateContrast();
-
-// Close drawer when clicking menu items on mobile
-document.querySelectorAll('.drawer-side a').forEach(link => {
-link.addEventListener('click', () => {
-document.getElementById('my-drawer').checked = false;
-});
-});
-
-document.getElementById('carpToggle').addEventListener('change', function() {
-    const goodExample = document.getElementById('goodCarp');
-    const badExample = document.getElementById('badCarp');
-    const explanation = document.getElementById('carpExplanation');
+// Tab Switching Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Tab functionality
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
     
-    if (this.checked) {
-        goodExample.classList.add('hidden');
-        badExample.classList.remove('hidden');
-        explanation.className = 'mt-6 alert alert-error';
-        explanation.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            <div>
-                <h3 class="font-bold">Poor CARP Implementation</h3>
-                <p>This example violates CARP principles:</p>
-                <ul class="mt-2 list-disc list-inside">
-                    <li>Inconsistent contrast in colors and text sizes</li>
-                    <li>Misaligned elements with random spacing</li>
-                    <li>Inconsistent repetition in button styles and borders</li>
-                    <li>Poor proximity with contact information scattered randomly</li>
-                </ul>
-            </div>
-        `;
-    } else {
-        goodExample.classList.remove('hidden');
-        badExample.classList.add('hidden');
-        explanation.className = 'mt-6 alert alert-success';
-        explanation.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            <div>
-                <h3 class="font-bold">Good CARP Implementation</h3>
-                <p>This example follows CARP principles:</p>
-                <ul class="mt-2 list-disc list-inside">
-                    <li>Strong contrast between text and backgrounds</li>
-                    <li>Consistent alignment in headings and content</li>
-                    <li>Repeated styling in cards and buttons</li>
-                    <li>Related elements grouped with proper proximity</li>
-                </ul>
-            </div>
-        `;
+    function switchTab(tabId) {
+        // Hide all tab contents
+        tabContents.forEach(content => {
+            content.classList.remove('active');
+        });
+        
+        // Remove active class from all buttons
+        tabButtons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Show the selected tab content
+        document.getElementById(tabId).classList.add('active');
+        
+        // Add active class to the clicked button
+        document.querySelectorAll(`[data-tab="${tabId}"]`).forEach(btn => {
+            btn.classList.add('active');
+        });
     }
-});
+    
+    // Set up click event for tab buttons
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            switchTab(tabId);
+        });
+    });
+    
+    // Set up prev/next buttons
+    document.querySelectorAll('.next-tab').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const currentTab = document.querySelector('.tab-content.active').id;
+            const tabs = Array.from(tabContents).map(tab => tab.id);
+            const currentIndex = tabs.indexOf(currentTab);
+            const nextIndex = (currentIndex + 1) % tabs.length;
+            switchTab(tabs[nextIndex]);
+        });
+    });
+    
+    document.querySelectorAll('.prev-tab').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const currentTab = document.querySelector('.tab-content.active').id;
+            const tabs = Array.from(tabContents).map(tab => tab.id);
+            const currentIndex = tabs.indexOf(currentTab);
+            const prevIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+            switchTab(tabs[prevIndex]);
+        });
+    });
 
-// Set initial explanation
-document.getElementById('carpToggle').dispatchEvent(new Event('change'));
+    // Color contrast checker
+    function calculateContrast(color1, color2) {
+        const hex2rgb = hex => {
+            const r = parseInt(hex.slice(1,3), 16);
+            const g = parseInt(hex.slice(3,5), 16);
+            const b = parseInt(hex.slice(5,7), 16);
+            return [r, g, b];
+        };
 
-// Initialize Tippy.js for all tooltips
-tippy('[data-tippy-content]', {
-    theme: 'light',
-    placement: 'top',
-    arrow: true
+        const luminance = rgb => {
+            const [r, g, b] = rgb.map(v => {
+                v /= 255;
+                return v <= 0.03928 ? v/12.92 : Math.pow((v + 0.055)/1.055, 2.4);
+            });
+            return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        };
+
+        const rgb1 = hex2rgb(color1);
+        const rgb2 = hex2rgb(color2);
+        const l1 = luminance(rgb1);
+        const l2 = luminance(rgb2);
+
+        const contrast = (Math.max(l1, l2) + 0.05)/(Math.min(l1, l2) + 0.05);
+        return contrast.toFixed(2);
+    }
+
+    function updateContrast() {
+        const textColor = document.getElementById('textColor').value;
+        const bgColor = document.getElementById('bgColor').value;
+        const testArea = document.getElementById('testArea');
+        const result = document.getElementById('contrastResult');
+
+        testArea.style.backgroundColor = bgColor;
+        testArea.querySelector('span').style.color = textColor;
+
+        const ratio = calculateContrast(textColor, bgColor);
+        const passes = ratio >= 4.5;
+
+        result.className = `glass-card p-4 rounded-lg mt-4 ${passes ? 'bg-green-500' : 'bg-red-500'} bg-opacity-20`;
+        result.textContent = `Contrast ratio: ${ratio}:1 - ${passes ? 'Passes' : 'Fails'} WCAG standards`;
+    }
+
+    // Add event listeners for contrast tool
+    if (document.getElementById('textColor')) {
+        document.getElementById('textColor').addEventListener('input', updateContrast);
+        document.getElementById('bgColor').addEventListener('input', updateContrast);
+        updateContrast(); // Initial check
+    }
+
+    // CARP toggle functionality
+    const carpToggle = document.getElementById('carpToggle');
+    if (carpToggle) {
+        carpToggle.addEventListener('change', function() {
+            const goodExample = document.getElementById('goodCarp');
+            const badExample = document.getElementById('badCarp');
+            const explanation = document.getElementById('carpExplanation');
+            
+            if (this.checked) {
+                goodExample.classList.add('hidden');
+                badExample.classList.remove('hidden');
+                explanation.className = 'mt-6 glass-card p-4 rounded-lg bg-red-500 bg-opacity-20';
+                explanation.innerHTML = `
+                    <div class="flex items-start">
+                        <svg class="w-6 h-6 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <div>
+                            <h3 class="font-bold">Poor CARP Implementation</h3>
+                            <p class="mt-1 mb-2">This example violates CARP principles:</p>
+                            <ul class="space-y-1 list-disc list-inside text-sm">
+                                <li>Inconsistent contrast in colors and text sizes</li>
+                                <li>Misaligned elements with random spacing</li>
+                                <li>Inconsistent repetition in button styles and borders</li>
+                                <li>Poor proximity with contact information scattered randomly</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            } else {
+                goodExample.classList.remove('hidden');
+                badExample.classList.add('hidden');
+                explanation.className = 'mt-6 glass-card p-4 rounded-lg bg-green-500 bg-opacity-20';
+                explanation.innerHTML = `
+                    <div class="flex items-start">
+                        <svg class="w-6 h-6 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <div>
+                            <h3 class="font-bold">Good CARP Implementation</h3>
+                            <p class="mt-1 mb-2">This example follows CARP principles:</p>
+                            <ul class="space-y-1 list-disc list-inside text-sm">
+                                <li>Strong contrast between text and backgrounds</li>
+                                <li>Consistent alignment in headings and content</li>
+                                <li>Repeated styling in cards and buttons</li>
+                                <li>Related elements grouped with proper proximity</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+        
+        // Set initial explanation
+        carpToggle.dispatchEvent(new Event('change'));
+    }
+    
+    // Initialize Tippy.js for all tooltips
+    if (typeof tippy !== 'undefined') {
+        tippy('[data-tippy-content]', {
+            theme: 'light',
+            placement: 'top',
+            arrow: true
+        });
+    }
 });
 </script>
 </body>
