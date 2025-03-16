@@ -1,428 +1,950 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Stories and Design Criteria</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+    <title>USER STORIES DESIGN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/inter-ui/3.19.3/inter.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 5rem;
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f7f7f7;
+            --accent-bg: #f0f0f0;
+            --accent-color: #FF5C00;
+            --active-color: #FF5C00;
+            --outline-color: #191919;
+            --text-color: #191919;
+            --shadow-sm: 0 0.15em 0 var(--outline-color);
+            --shadow-md: 0 0.25em 0 var(--outline-color);
+            --border-radius: 0.6em;
+            --transition-time: 0.15s;
+            --bad-color: #ff4d4f;
+            --good-color: #52c41a;
+            --section-padding: 40px 60px;
         }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            letter-spacing: -0.01em;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 10px;
-            background: #222;
+            width: 14px;
         }
+
+        ::-webkit-scrollbar-track {
+            background-color: var(--secondary-bg);
+            border-radius: 10px;
+        }
+
         ::-webkit-scrollbar-thumb {
-            background: #002654;
+            background-color: var(--accent-color);
+            border: 3px solid var(--secondary-bg);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: var(--active-color);
+            transform: scale(1.05);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-top: 0;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 1px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 1px;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Side Navigation */
+        .sidebar {
+            width: 160px;
+            background-color: var(--secondary-bg);
+            border-right: 2px solid var(--outline-color);
+            position: fixed;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px 0;
+            z-index: 100;
+        }
+
+        .sidebar-logo {
+            font-size: 1.1em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 15px;
+            line-height: 1.3;
+            color: var(--text-color);
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .tab-button {
+            width: 130px;
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            padding: 15px 0;
+            background-color: var(--accent-bg);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.9em;
+            letter-spacing: 0.03em;
+            cursor: pointer;
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+            transform: translateY(0);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-button:hover {
+            transform: translateY(-0.25em);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tab-button.active {
+            background-color: var(--active-color);
+            color: white;
+        }
+
+        .tab-button i {
+            font-size: 1.4em;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 160px;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Content Sections */
+        .light-section {
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            padding: var(--section-padding);
+        }
+
+        .dark-section {
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+            padding: var(--section-padding);
+        }
+
+        /* Card */
+        .card {
+            background-color: var(--primary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            position: relative;
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(0);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .card:hover {
+            transform: translateY(-0.25em);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Elements Grid */
+        .elements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .element-card {
+            background-color: var(--primary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(0);
+            overflow: hidden;
+        }
+
+        .element-card:hover {
+            transform: translateY(-0.25em);
+            box-shadow: var(--shadow-md);
+        }
+
+        .element-header {
+            background-color: var(--secondary-bg);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid var(--outline-color);
+        }
+
+        .element-number {
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent-color);
+            color: white;
+            border: 2px solid var(--outline-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .element-content {
+            padding: 20px 25px;
+            color: var(--text-color);
+        }
+
+        .element-content ul {
+            list-style-type: none;
+            margin: 15px 0 0;
+            padding: 0;
+        }
+
+        .element-content ul li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .element-content ul li::before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: var(--accent-color);
+            font-size: 1.2em;
+        }
+
+        /* Story Format */
+        .story-format {
+            background-color: var(--secondary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .story-highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Table */
+        .criteria-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 20px;
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .criteria-table th {
+            padding: 15px;
+            text-align: left;
+            background-color: var(--accent-bg);
+            border-bottom: 2px solid var(--outline-color);
+        }
+
+        .criteria-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--outline-color);
+            background-color: var(--primary-bg);
+        }
+
+        .criteria-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Indicators */
+        .bad-indicator {
+            color: var(--bad-color);
+            margin-right: 10px;
+        }
+
+        .good-indicator {
+            color: var(--good-color);
+            margin-right: 10px;
+        }
+
+        /* Example Boxes */
+        .example-box {
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border: 2px solid var(--outline-color);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .bad-example {
+            background-color: rgba(255, 77, 79, 0.1);
+            border-left: 4px solid var(--bad-color);
+        }
+
+        .good-example {
+            background-color: rgba(82, 196, 26, 0.1);
+            border-left: 4px solid var(--good-color);
+        }
+
+        /* Toggle Switch */
+        .switch {
+            --switch_width: 2.2em;
+            --switch_height: 1.2em;
+            --thumb_color: #ffffff;
+            --track_color: var(--accent-bg);
+            --track_active_color: var(--active-color);
+            --outline_color: var(--outline-color);
+            font-size: 16px;
+            position: relative;
+            display: inline-block;
+            width: var(--switch_width);
+            height: var(--switch_height);
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            box-sizing: border-box;
+            border: 2px solid var(--outline_color);
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--track_color);
+            transition: .15s;
+            border-radius: var(--switch_height);
+        }
+
+        .slider:before {
+            box-sizing: border-box;
+            position: absolute;
+            content: "";
+            height: var(--switch_height);
+            width: var(--switch_height);
+            border: 2px solid var(--outline_color);
+            border-radius: 100%;
+            left: -2px;
+            bottom: -2px;
+            background-color: var(--thumb_color);
+            transform: translateY(-0.15em);
+            box-shadow: 0 0.15em 0 var(--outline_color);
+            transition: .15s;
+        }
+
+        input:checked + .slider {
+            background-color: var(--track_active_color);
+        }
+
+        input:focus-visible + .slider {
+            box-shadow: 0 0 0 2px var(--track_active_color);
+        }
+
+        input:hover + .slider:before {
+            transform: translateY(-0.25em);
+            box-shadow: 0 0.25em 0 var(--outline_color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(calc(var(--switch_width) - var(--switch_height))) translateY(-0.15em);
+        }
+
+        input:hover:checked + .slider:before {
+            transform: translateX(calc(var(--switch_width) - var(--switch_height))) translateY(-0.25em);
+            box-shadow: 0 0.25em 0 var(--outline_color);
+        }
+
+        /* Toggle container */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .toggle-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            padding: 20px;
+            text-align: center;
+            font-size: 0.85em;
+            opacity: 0.7;
+            background-color: var(--secondary-bg);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                padding: 15px;
+                overflow-x: auto;
+            }
+            
+            .sidebar-nav {
+                flex-direction: row;
+                justify-content: flex-start;
+                padding-bottom: 10px;
+                overflow-x: auto;
+            }
+            
+            .sidebar-logo {
+                margin-bottom: 0;
+                margin-right: 20px;
+                white-space: nowrap;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+
+            .tab-button {
+                min-width: 100px;
+                padding: 10px;
+            }
+
+            .elements-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .light-section, .dark-section {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
-<body class="bg-base-200 min-h-screen">
-    <!-- Navbar -->
-    <div class="navbar bg-base-100 shadow-lg sticky top-0 z-50">
-        <div class="flex-1">
-            <a href="index.html" class="btn btn-ghost normal-case text-xl">User Stories and Design Criteria</a>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">USER STORIES DESIGN</div>
+        <div class="sidebar-nav">
+            <button class="tab-button active" data-tab="intro">
+                <i class="fas fa-shield-alt"></i>
+                INTRO
+            </button>
+            <button class="tab-button" data-tab="steps">
+                <i class="fas fa-list-ul"></i>
+                STEPS
+            </button>
+            <button class="tab-button" data-tab="examples">
+                <i class="fas fa-file-alt"></i>
+                EXAMPLES
+            </button>
+            <button class="tab-button" data-tab="criteria">
+                <i class="fas fa-check-square"></i>
+                CRITERIA
+            </button>
+            <button class="tab-button" data-tab="resources">
+                <i class="fas fa-book"></i>
+                RESOURCES
+            </button>
         </div>
-        <div class="flex-none">
-            <ul class="menu menu-horizontal px-1">
-                <li><a href="#intro">Introduction</a></li>
-                <li><a href="#steps">Steps</a></li>
-                <li><a href="#examples">Examples</a></li>
-                <li><a href="#criteria">Design Criteria</a></li>
-                <li><a href="#resources">Additional Resources</a></li>
-            </ul>
-        </div>
-    </div>
+    </aside>
 
-    <div class="container mx-auto px-4 py-8">
-        <!-- Introduction -->
-
-        <section id="intro" class="card bg-base-100 shadow-xl mb-8">
-            <div class="card-body">
-                <h1 class="card-title text-3xl mb-4">Creating User Stories from Technical Requirements</h1>
-                <p class="text-lg">User stories help translate technical requirements into clear, user-focused descriptions of functionality. They follow the format:</p>
-                <div class="bg-base-200 p-4 rounded-lg my-4">
-                <p>As a <span class="font-bold">[type of user]</span>, I want to <span class="font-bold">[goal]</span>, so that I can <span class="font-bold">[benefit]</span>.</p>
-            </div>
-                <div class="bg-base-200 p-4 rounded-lg my-4">
-                    <p id="typewriter" class="font-mono h-6"></p>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Introduction Tab -->
+        <div id="intro" class="tab-content active">
+            <div class="light-section">
+                <h1>WHAT IS A USER STORY?</h1>
+                
+                <div class="card">
+                    <p>User stories help translate technical requirements into clear, user-focused descriptions of functionality. They follow a specific format:</p>
+                    
+                    <div class="story-format">
+                        <p>As a <span class="story-highlight">[type of user]</span>, I want to <span class="story-highlight">[goal]</span>, so that I can <span class="story-highlight">[benefit]</span>.</p>
+                    </div>
+                    
+                    <p>This simple structure ensures that all development work focuses on delivering value to users rather than implementing technology for its own sake.</p>
                 </div>
             </div>
-        </section>
-
-        <!-- Steps Section -->
-        <section id="steps" class="card bg-base-100 shadow-xl mb-8">
-            <div class="card-body">
-                <h2 class="card-title text-2xl mb-4">Steps to Creating User Stories</h2>
-                <div class="steps steps-vertical lg:steps-horizontal">
-                    <div class="step step-primary">Identify the User(s)</div>
-                    <div class="step step-primary">Define Goals</div>
-                    <div class="step step-primary">Specify Benefits</div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-                    <div class="card bg-base-200">
-                        <div class="card-body">
-                            <h3 class="card-title">1. Identify Users</h3>
-                            <p>Who will use this feature? Be specific about the type of user:</p>
-                            <ul class="list-disc list-inside mt-2">
+            
+            <div class="dark-section">
+                <h2>USER STORY ELEMENTS</h2>
+                
+                <div class="elements-grid">
+                    <div class="element-card">
+                        <div class="element-header">
+                            <div class="element-number">1</div>
+                            <h3>USER ROLE</h3>
+                        </div>
+                        <div class="element-content">
+                            <p>Identifies who will use the feature and their context.</p>
+                            <ul>
                                 <li>Registered user</li>
                                 <li>Admin user</li>
                                 <li>Guest visitor</li>
+                                <li>Content creator</li>
+                                <li>Customer support</li>
                             </ul>
                         </div>
                     </div>
-
-                    <div class="card bg-base-200">
-                        <div class="card-body">
-                            <h3 class="card-title">2. Define Goals</h3>
-                            <p>What does the user want to accomplish? Make it:</p>
-                            <ul class="list-disc list-inside mt-2">
-                                <li>Clear and specific</li>
-                                <li>Action-oriented</li>
-                                <li>Achievable</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="card bg-base-200">
-                        <div class="card-body">
-                            <h3 class="card-title">3. Specify Benefits</h3>
-                            <p>Why does the user want this? Include:</p>
-                            <ul class="list-disc list-inside mt-2">
-                                <li>Clear value</li>
-                                <li>Business benefit</li>
-                                <li>User benefit</li>
-                            </ul>
-                        </div>
-                    </div>
-
                     
-                    <h2 class="card-title text-2xl mt-4">Example</h2>
-
-                </div>
-                <div class="grid grid-cols-1 gap-6 mt-6">
-                    <!-- Simple Idea -->
-                    <div class="card bg-neutral text-neutral-content">
-                        <div class="card-body">
-                            <h3 class="card-title text-xl">📋 Technical Proposal Requirement</h3>
-                            <div class="p-4 bg-base-300 rounded-lg text-base-content mt-1">
-                                <p>"We need a way for our customers to quickly find what they are looking for on the website."</p>
-                            </div>
+                    <div class="element-card">
+                        <div class="element-header">
+                            <div class="element-number">2</div>
+                            <h3>USER GOAL</h3>
+                        </div>
+                        <div class="element-content">
+                            <p>What the user wants to accomplish.</p>
+                            <ul>
+                                <li>Search for content</li>
+                                <li>Update profile</li>
+                                <li>Save preferences</li>
+                                <li>Share information</li>
+                                <li>View statistics</li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-                <!-- User Stories -->
-            <div class="card bg-base-200 mt-6">
-                <div class="card-body">
-                    <h3 class="card-title text-xl">📝 Break this down into a user story using our formula</h3>
-                    <div class="space-y-4">
-                        <div class="p-4 bg-base-300 rounded-lg">
-                            <p class="mb-4">As a <span class="font-bold">[type of user]</span>, I want to <span class="font-bold">[goal]</span>, so that I can <span class="font-bold">[benefit]</span>.</p>
-<hr>
-                            <p class="font-mono mt-4">As a <span class="font-bold">user</span>, I want <span class="font-bold">a search bar</span> so that I can <span class="font-bold">find the item I want to buy quickly</span>.</p>
+                    
+                    <div class="element-card">
+                        <div class="element-header">
+                            <div class="element-number">3</div>
+                            <h3>USER BENEFIT</h3>
                         </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </section>
-
-        
-
-
-        <!-- Examples Section -->
-<section id="examples" class="card bg-base-100 shadow-xl mb-8">
-    <div class="card-body">
-        <h2 class="card-title text-2xl mb-4">Interactive Examples: Good vs Bad User Stories</h2>
-        <p class="mb-6">Toggle between examples to see what makes a good user story. Each example highlights common mistakes and how to fix them.</p>
-
-        <!-- Example 1: Non-atomic vs Atomic -->
-        <div class="mb-8">
-            <div class="text-center mb-4">
-                <h3 class="text-xl font-bold mb-4">Example 1: Keeping Stories Focused</h3>
-                <div class="flex items-center justify-center gap-4">
-                    <span class="text-sm">Show Bad Example</span>
-                    <input type="checkbox" class="toggle toggle-primary" id="toggle1" />
-                    <span class="text-sm">Show Good Example</span>
-                </div>
-            </div>
-
-            <div class="card bg-base-200">
-                <div class="card-body">
-                    <div id="story1-bad" class="transition-opacity duration-300">
-                        <div class="alert alert-error mb-4">
-                            <span class="font-bold">❌ Bad User Story:</span>
-                        </div>
-                        <p class="font-mono mb-4">As a student, I want to log in to the school website, view my timetable, check my grades, and message my teachers so that I can manage my school work.</p>
-                        <div class="alert alert-warning mt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                            <div>
-                                <h3 class="font-bold">Why this needs improvement:</h3>
-                                <p>This story tries to do too many things at once. It combines login, timetable, grades, and messaging into one story.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="story1-good" class="hidden transition-opacity duration-300">
-                        <div class="alert alert-success mb-4">
-                            <span class="font-bold">✅ Better User Story:</span>
-                        </div>
-                        <p class="font-mono mb-4">As a student, I want to view my current timetable so that I can see my daily class schedule.</p>
-                        <div class="alert alert-info mt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            <div>
-                                <h3 class="font-bold">Why this is better:</h3>
-                                <p>This story focuses on one specific feature (viewing timetable). Other features like login and messaging would be separate stories.</p>
-                            </div>
+                        <div class="element-content">
+                            <p>Why the user wants this feature.</p>
+                            <ul>
+                                <li>Save time</li>
+                                <li>Reduce errors</li>
+                                <li>Make decisions</li>
+                                <li>Stay informed</li>
+                                <li>Achieve goals</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Example 2: Technical vs User-Focused -->
-        <div class="mb-8">
-            <div class="text-center mb-4">
-                <h3 class="text-xl font-bold mb-4">Example 2: Writing for Users</h3>
-                <div class="flex items-center justify-center gap-4">
-                    <span class="text-sm">Show Bad Example</span>
-                    <input type="checkbox" class="toggle toggle-primary" id="toggle2" />
-                    <span class="text-sm">Show Good Example</span>
-                </div>
-            </div>
-
-            <div class="card bg-base-200">
-                <div class="card-body">
-                    <div id="story2-bad" class="transition-opacity duration-300">
-                        <div class="alert alert-error mb-4">
-                            <span class="font-bold">❌ Bad User Story:</span>
+        <!-- Steps Tab -->
+        <div id="steps" class="tab-content">
+            <div class="dark-section">
+                <h2>CREATING USER STORIES</h2>
+                
+                <div class="elements-grid">
+                    <div class="element-card">
+                        <div class="element-header">
+                            <div class="element-number">1</div>
+                            <h3>IDENTIFY USERS</h3>
                         </div>
-                        <p class="font-mono mb-4">The system needs to implement a MongoDB database to store user profile pictures with image compression.</p>
-                        <div class="alert alert-warning mt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                            <div>
-                                <h3 class="font-bold">Why this needs improvement:</h3>
-                                <p>This is written as a technical requirement, not a user story. It focuses on the technical implementation (MongoDB, compression) rather than user needs.</p>
-                            </div>
+                        <div class="element-content">
+                            <p>Who will use this feature? Be specific:</p>
+                            <ul>
+                                <li>Student</li>
+                                <li>Teacher</li>
+                                <li>Admin</li>
+                                <li>Guest</li>
+                                <li>Parent</li>
+                            </ul>
                         </div>
                     </div>
-
-                    <div id="story2-good" class="hidden transition-opacity duration-300">
-                        <div class="alert alert-success mb-4">
-                            <span class="font-bold">✅ Better User Story:</span>
+                    
+                    <div class="element-card">
+                        <div class="element-header">
+                            <div class="element-number">2</div>
+                            <h3>DEFINE GOALS</h3>
                         </div>
-                        <p class="font-mono mb-4">As a student, I want to upload a profile picture to my account so that my classmates can easily recognize me.</p>
-                        <div class="alert alert-info mt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            <div>
-                                <h3 class="font-bold">Why this is better:</h3>
-                                <p>This story focuses on what the user wants to do (upload a picture) and why they want to do it (recognition by classmates).</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Example 3: Vague vs Specific -->
-        <div class="mb-8">
-            <div class="text-center mb-4">
-                <h3 class="text-xl font-bold mb-4">Example 3: Being Specific</h3>
-                <div class="flex items-center justify-center gap-4">
-                    <span class="text-sm">Show Bad Example</span>
-                    <input type="checkbox" class="toggle toggle-primary" id="toggle3" />
-                    <span class="text-sm">Show Good Example</span>
-                </div>
-            </div>
-
-            <div class="card bg-base-200">
-                <div class="card-body">
-                    <div id="story3-bad" class="transition-opacity duration-300">
-                        <div class="alert alert-error mb-4">
-                            <span class="font-bold">❌ Bad User Story:</span>
-                        </div>
-                        <p class="font-mono mb-4">As a student, I want the website to work better so that I can use it more easily.</p>
-                        <div class="alert alert-warning mt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                            <div>
-                                <h3 class="font-bold">Why this needs improvement:</h3>
-                                <p>"Work better" and "more easily" are too vague. How would we know when this story is complete?</p>
-                            </div>
+                        <div class="element-content">
+                            <p>What do they want to do?</p>
+                            <ul>
+                                <li>View grades</li>
+                                <li>Submit assignments</li>
+                                <li>Message teachers</li>
+                                <li>Check schedule</li>
+                                <li>Download resources</li>
+                            </ul>
                         </div>
                     </div>
-
-                    <div id="story3-good" class="hidden transition-opacity duration-300">
-                        <div class="alert alert-success mb-4">
-                            <span class="font-bold">✅ Better User Story:</span>
+                    
+                    <div class="element-card">
+                        <div class="element-header">
+                            <div class="element-number">3</div>
+                            <h3>SPECIFY BENEFITS</h3>
                         </div>
-                        <p class="font-mono mb-4">As a student, I want to search for assignments by subject and due date so that I can prioritize my homework.</p>
-                        <div class="alert alert-info mt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            <div>
-                                <h3 class="font-bold">Why this is better:</h3>
-                                <p>This story clearly states what the user wants (search by subject/date) and why (prioritize homework). We can test if these specific features work.</p>
-                            </div>
+                        <div class="element-content">
+                            <p>Why do they want this?</p>
+                            <ul>
+                                <li>Track progress</li>
+                                <li>Save time</li>
+                                <li>Avoid mistakes</li>
+                                <li>Improve learning</li>
+                                <li>Plan effectively</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- Design Criteria Section -->
-<section id="criteria" class="card bg-base-100 shadow-xl mb-8">
-    <div class="card-body">
-        <h2 class="card-title text-2xl mb-4">Creating Design Criteria</h2>
-        <p class="mb-4">Once you've gathered your user stories, you can transform them into clear design criteria that will guide your website development and evaluation.</p>
-
-        <div class="alert alert-info mb-6">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <div>
-                <h3 class="font-bold">Remember:</h3>
-                <p>Design criteria should focus on WHAT the website must do, not HOW it will do it.</p>
-            </div>
-        </div>
-
-        <!-- Example Transformation -->
-        <div class="bg-base-200 p-6 rounded-lg mb-6">
-            <h3 class="text-xl font-bold mb-4">Example: From User Story to Design Criteria</h3>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="card bg-base-300">
-                    <div class="card-body">
-                        <h4 class="card-title text-lg">📝 User Stories</h4>
-                        <ul class="space-y-4">
-                            <li class="font-mono text-sm">"As a student, I want to search for assignments by subject and due date so that I can prioritize my homework."</li>
-                            <li class="font-mono text-sm">"As a student, I want to see my assignment grades immediately after they're entered so I can track my progress."</li>
-                        </ul>
-                    </div>
+            <div class="light-section">
+                <h2>EXAMPLE</h2>
+                
+                <div class="card">
+                    <h3>📋 TECHNICAL REQUIREMENT</h3>
+                    <p>"Add a search feature to the website."</p>
                 </div>
-
-                <div class="card bg-base-300">
-                    <div class="card-body">
-                        <h4 class="card-title text-lg">✅ Design Criteria</h4>
-                        <ul class="space-y-4">
-                            <li>The website must allow users to filter assignments by both subject and due date</li>
-                            <li>The website must display assignment grades to students as soon as they are entered into the system</li>
-                        </ul>
+                
+                <div class="card">
+                    <h3>📝 USER STORY</h3>
+                    <div class="story-format">
+                        <p>As a <span class="story-highlight">user</span>, I want to <span class="story-highlight">search for products by name</span> so that I can <span class="story-highlight">quickly find what I'm looking for</span>.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Good vs Bad Criteria -->
-        <div class="card bg-base-200">
-            <div class="card-body">
-                <h3 class="card-title text-xl mb-4">Good vs Poor Design Criteria</h3>
-                <div class="overflow-x-auto">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th class="text-error">❌ Poor Criteria</th>
-                                <th class="text-success">✅ Good Criteria</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-error">"Use MongoDB to store user data"</td>
-                                <td class="text-success">"The system must securely store user profile information"</td>
-                            </tr>
-                            <tr>
-                                <td class="text-error">"Make the website look nice"</td>
-                                <td class="text-success">"The website must use CARP and the usability principles"</td>
-                            </tr>
-                            <tr>
-                                <td class="text-error">"Add a React search component"</td>
-                                <td class="text-success">"Users must be able to search content within 2 seconds"</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Evaluation Reminder -->
-        <div class="alert alert-warning mt-6">
-            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-            <div>
-                <h3 class="font-bold">Important!</h3>
-                <p>Your design criteria will be used by both you and your peers to evaluate your final website. Make sure each criterion is:</p>
-                <ul class="mt-2">
-                    <li>• Measurable and testable</li>
-                    <li>• Clear and unambiguous</li>
-                    <li>• Focused on requirements, not solutions</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Additional Resources Section -->
-<section id="resources" class="card bg-base-100 shadow-xl mb-8">
-    <div class="card-body">
-        <h2 class="card-title text-2xl mb-4">Additional Resources</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <a href="https://www.atlassian.com/agile/project-management/user-stories" target="_blank" 
-               class="card bg-base-200 hover:bg-base-300 transition-all duration-300">
-                <div class="card-body flex flex-row items-center gap-4">
-                    <div class="text-2xl">📝</div>
-                    <div>
-                        <h3 class="font-bold">More User Story Examples</h3>
-                        <p class="text-sm opacity-70">Examples of more user stories and templates you can use</p>
+        <!-- Examples Tab -->
+        <div id="examples" class="tab-content">
+            <div class="dark-section">
+                <h2>GOOD VS BAD EXAMPLES</h2>
+                
+                <div class="card">
+                    <h3>TOO BROAD VS FOCUSED</h3>
+                    
+                    <div class="toggle-container">
+                        <span class="toggle-label">BAD EXAMPLE</span>
+                        <label class="switch">
+                            <input type="checkbox" id="toggle1">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="toggle-label">GOOD EXAMPLE</span>
+                    </div>
+                    
+                    <div id="story1-bad">
+                        <div class="example-box bad-example">
+                            <h3>❌ BAD USER STORY</h3>
+                            <p>As a student, I want the website to have all my school stuff so I can do my work.</p>
+                            <div style="margin-top: 15px;">
+                                <strong>WHY IT'S BAD:</strong>
+                                <p>Too vague with no specific functionality or benefit. What does "all my school stuff" mean?</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="story1-good" style="display: none;">
+                        <div class="example-box good-example">
+                            <h3>✅ GOOD USER STORY</h3>
+                            <p>As a student, I want to view my current grades for each class so that I can track my academic progress.</p>
+                            <div style="margin-top: 15px;">
+                                <strong>WHY IT'S GOOD:</strong>
+                                <p>Specific user (student), clear goal (view grades), and concrete benefit (track progress).</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </a>
+                
+                <div class="card">
+                    <h3>TECHNICAL VS USER-FOCUSED</h3>
+                    
+                    <div class="toggle-container">
+                        <span class="toggle-label">BAD EXAMPLE</span>
+                        <label class="switch">
+                            <input type="checkbox" id="toggle2">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="toggle-label">GOOD EXAMPLE</span>
+                    </div>
+                    
+                    <div id="story2-bad">
+                        <div class="example-box bad-example">
+                            <h3>❌ BAD USER STORY</h3>
+                            <p>Implement a SQL database to store user profiles with a caching layer.</p>
+                            <div style="margin-top: 15px;">
+                                <strong>WHY IT'S BAD:</strong>
+                                <p>Focuses on technical implementation details instead of user needs.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="story2-good" style="display: none;">
+                        <div class="example-box good-example">
+                            <h3>✅ GOOD USER STORY</h3>
+                            <p>As a user, I want to create a profile with my photo and interests so that I can connect with others who share my hobbies.</p>
+                            <div style="margin-top: 15px;">
+                                <strong>WHY IT'S GOOD:</strong>
+                                <p>Focuses on what the user wants to do (create profile) and why (connect with others).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
 
-<script>
-    // Toggle functionality for each example
-    function setupToggle(id, badId, goodId) {
-        const toggle = document.getElementById(id);
-        const badExample = document.getElementById(badId);
-        const goodExample = document.getElementById(goodId);
+        <!-- Criteria Tab -->
+        <div id="criteria" class="tab-content">
+            <div class="dark-section">
+                <h2>GOOD VS POOR CRITERIA</h2>
+                
+                <table class="criteria-table">
+                    <thead>
+                        <tr>
+                            <th><span class="bad-indicator">✕</span> POOR CRITERIA</th>
+                            <th><span class="good-indicator">✓</span> GOOD CRITERIA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"Make it look good"</td>
+                            <td>"Use consistent color scheme from our style guide"</td>
+                        </tr>
+                        <tr>
+                            <td>"Use React for the frontend"</td>
+                            <td>"Interface must respond within 2 seconds"</td>
+                        </tr>
+                        <tr>
+                            <td>"Add a cool dashboard"</td>
+                            <td>"Dashboard must display grades, attendance, and upcoming assignments"</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="light-section">
+                <h2>FROM USER STORY TO DESIGN CRITERIA</h2>
+                
+                <div class="card">
+                    <h3>USER STORY</h3>
+                    <div class="story-format">
+                        <p>As a student, I want to search for assignments by subject so that I can find my work quickly.</p>
+                    </div>
+                    
+                    <h3>DESIGN CRITERIA</h3>
+                    <ul style="margin-top: 15px; margin-left: 20px;">
+                        <li>The website must allow filtering assignments by subject</li>
+                        <li>Search results must appear within 3 seconds</li>
+                        <li>Results must be sorted by due date by default</li>
+                        <li>Each result must show the assignment name, class, and due date</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-        toggle.addEventListener('change', function() {
-            if (this.checked) {
-                badExample.classList.add('hidden');
-                goodExample.classList.remove('hidden');
-            } else {
-                badExample.classList.remove('hidden');
-                goodExample.classList.add('hidden');
-            }
+        <!-- Resources Tab -->
+        <div id="resources" class="tab-content">
+            <div class="dark-section">
+                <h2>ADDITIONAL RESOURCES</h2>
+                
+                <div class="elements-grid">
+                    <div class="element-card">
+                        <div class="element-header">
+                            <div class="element-number">1</div>
+                            <h3>TEMPLATES</h3>
+                        </div>
+                        <div class="element-content">
+                            <p>Ready-to-use documents</p>
+                            <ul>
+                                <li>User story templates</li>
+                                <li>Acceptance criteria</li>
+                                <li>Evaluation forms</li>
+                                <li>Design criteria checklist</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="element-card">
+                        <div class="element-header">
+                            <div class="element-number">2</div>
+                            <h3>WORKSHOPS</h3>
+                        </div>
+                        <div class="element-content">
+                            <p>Collaborative session guides</p>
+                            <ul>
+                                <li>Stakeholder interviews</li>
+                                <li>User story mapping</li>
+                                <li>Prioritization techniques</li>
+                                <li>Refinement exercises</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="element-card">
+                        <div class="element-header">
+                            <div class="element-number">3</div>
+                            <h3>GUIDELINES</h3>
+                        </div>
+                        <div class="element-content">
+                            <p>Best practices documentation</p>
+                            <ul>
+                                <li>Story splitting methods</li>
+                                <li>Testing approaches</li>
+                                <li>Definition of ready</li>
+                                <li>Definition of done</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+
+    <script>
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => {
+                    content.style.opacity = '0';
+                    content.style.transform = 'translateY(10px)';
+                    setTimeout(() => {
+                        content.classList.remove('active');
+                    }, 200);
+                });
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Show corresponding content with animation
+                const tabId = button.getAttribute('data-tab');
+                setTimeout(() => {
+                    document.getElementById(tabId).classList.add('active');
+                    setTimeout(() => {
+                        document.getElementById(tabId).style.opacity = '1';
+                        document.getElementById(tabId).style.transform = 'translateY(0)';
+                    }, 50);
+                }, 200);
+            });
         });
-    }
-
-    // Set up toggles for all examples
-    setupToggle('toggle1', 'story1-bad', 'story1-good');
-    setupToggle('toggle2', 'story2-bad', 'story2-good');
-    setupToggle('toggle3', 'story3-bad', 'story3-good');
-
-    // Typewriter animation
-    const typewriter = new Typewriter('#typewriter', {
-            loop: true,
-            delay: 50,
-        });
-
-        typewriter
-    // First string
-    .typeString('As a student, I want to view my grades so that I can track my overall progress.')
-    .pauseFor(3000)
-    .deleteAll()
-    .pauseFor(1000)
-    // Second string
-    .typeString('As a teacher, I want to add assignments so that students can view their grades.')
-    .pauseFor(3000)
-    .deleteAll()
-    .pauseFor(1000)
-    // Loop back to the first
-    .start();
-
-</script>
+        
+        // Example toggles
+        function setupToggle(toggleId, badId, goodId) {
+            const toggle = document.getElementById(toggleId);
+            const badExample = document.getElementById(badId);
+            const goodExample = document.getElementById(goodId);
+            
+            toggle.addEventListener('change', function() {
+                if (this.checked) {
+                    badExample.style.display = 'none';
+                    goodExample.style.display = 'block';
+                } else {
+                    badExample.style.display = 'block';
+                    goodExample.style.display = 'none';
+                }
+            });
+        }
+        
+        // Set up toggles
+        setupToggle('toggle1', 'story1-bad', 'story1-good');
+        setupToggle('toggle2', 'story2-bad', 'story2-good');
+    </script>
+</body>
+</html>
